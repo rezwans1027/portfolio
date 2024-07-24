@@ -23,7 +23,7 @@ const config = {
       },
       textShadow: {
         sm: '1px 1px 2px rgba(0, 0, 0, 0.5)',
-        DEFAULT: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+        DEFAULT: '1px 1px 2px rgba(0, 0, 0, 0.5)',
         lg: '3px 3px 6px rgba(0, 0, 0, 0.5)',
         xl: '4px 4px 8px rgba(0, 0, 0, 0.5)',
       },
@@ -94,10 +94,10 @@ const config = {
     function ({ addUtilities }) {
       const newUtilities = {
         '.text-shadow-sm': {
-          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.5)',
+          textShadow: '1px 1px 2px rgba(0, 0, 0, 0.25)',
         },
         '.text-shadow': {
-          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.5)',
+          textShadow: '2px 2px 4px rgba(0, 0, 0, 0.35)',
         },
         '.text-shadow-lg': {
           textShadow: '3px 3px 6px rgba(0, 0, 0, 0.5)',
