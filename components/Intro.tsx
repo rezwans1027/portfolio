@@ -2,6 +2,8 @@ import { Button } from '@/components/ui/button'
 import LinkedIn from '/public/linkedin.svg'
 import Github from '../public/Github.svg'
 
+// TODO: make larger 
+
 const Intro = () => {
   return (
     <div className='xs:px-12 flex select-none flex-col gap-8 p-6 px-2 lg:px-32'>

@@ -1,24 +1,23 @@
 import Link from 'next/link'
 import React from 'react'
 
-// TODO: add underline to active link
 // TODO: add hamburger menu for mobile
-// TODO: change href to section id with smooth scroll
 
 const Header = () => {
   return (
     <div className='fixed w-full select-none'>
       <div className='flex items-center justify-between bg-oxford p-6 text-white shadow-2xl'>
         <Link
-          className='flex items-center gap-2 text-3xl font-semibold text-orange-600 transition duration-200 hover:text-amber-900'
+          className='group flex items-center gap-2 text-3xl font-semibold text-orange-600 transition duration-200 hover:text-amber-900'
           href='/'
         >
-          Portfolio
-          <div className='pt-1 text-sm font-thin text-white max-sm:hidden'>
+          <div>Portfolio</div>
+
+          <div className='pt-1 text-sm font-thin text-white transition duration-200 group-hover:text-slate-500 max-sm:hidden'>
             by Rezwan Sheikh
           </div>
         </Link>
-        <div className='max-xs:hidden flex gap-6'>
+        <div className='flex gap-6 max-xs:hidden'>
           <Link
             className='underline-offset-8 transition duration-200 hover:text-slate-400'
             href='#about'
@@ -27,13 +26,13 @@ const Header = () => {
           </Link>
           <Link
             className='underline-offset-8 transition duration-200 hover:text-slate-400'
-            href='/projects'
+            href='#projects'
           >
             Projects
           </Link>
           <Link
             className='underline-offset-8 transition duration-200 hover:text-slate-400'
-            href='/contact'
+            href='#contact'
           >
             Contact
           </Link>
