@@ -10,7 +10,7 @@ const Intro = () => {
     <div className='flex select-none flex-col gap-8 p-6 px-2 xs:px-12 lg:px-32'>
       <div className='max-w-6xl'>
         <h1 className='text-shadow-s pl-[2.5px] text-4xl font-bold text-black md:text-5xl'>
-          Hey, I'm
+          Hey, I&apos;m
         </h1>
         <p className='mt-4 w-fit rounded-2xl bg-oxford p-2 px-5 text-6xl font-bold text-orange-500 text-shadow-sm sm:text-7xl md:text-8xl'>
           Rezwan Sheikh

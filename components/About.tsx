@@ -1,5 +1,4 @@
 import React from 'react'
-import NextLogo from '../public/tech/NextLogo.svg'
 
 const About = () => {
   return (
@@ -11,12 +10,12 @@ const About = () => {
         <h1 className='rounded-t-2xl p-4 text-5xl text-black'>About Me</h1>
         <div className='bg-orange mt-8 sm:rounded-2xl border-2 border-black p-4 text-lg text-black'>
           <p className='mb-4'>
-            Hello! I'm Rezwan Sheikh, a junior studying Computer Science. My journey in tech has been
+            Hello! I&apos;m Rezwan Sheikh, a junior studying Computer Science. My journey in tech has been
             fueled by a passion for problem-solving and innovation, and a
             relentless drive to achieve my goals.
           </p>
           <p className='mb-4'>
-            Although I'm from Bangladesh, I was born and raised in New York City. Growing up in NYC, I've always had a curious mind
+            Although I&apos;m from Bangladesh, I was born and raised in New York City. Growing up in NYC, I&apos;ve always had a curious mind
             and a love for learning. This curiosity eventually led me to the
             world of computer science, where I found my true calling. Aside from
             coding, I enjoy playing basketball, which helps me stay active and
@@ -27,7 +26,7 @@ const About = () => {
             to Computer Science. The past seven months have been a whirlwind of
             learning and growth as I embarked on the path of becoming a
             self-taught full stack developer. This journey has been challenging
-            yet incredibly rewarding, as I've gained expertise in both front-end
+            yet incredibly rewarding, as I&apos;ve gained expertise in both front-end
             and back-end development.
           </p>
           <p className='mb-4'>
