@@ -5,7 +5,7 @@ import React from 'react'
 
 const Header = () => {
   return (
-    <div className='fixed w-full select-none'>
+    <div className='fixed z-50 w-full select-none'>
       <div className='flex items-center justify-between bg-oxford p-6 text-white shadow-2xl'>
         <Link
           className='group flex items-center gap-2 text-3xl font-semibold text-orange-600 transition duration-200 hover:text-amber-900'

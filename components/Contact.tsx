@@ -39,11 +39,11 @@ const Contact = () => {
   }
 
   return (
-    <div id='contact' className='w-full bg-oxford p-12 flex justify-center'>
+    <div id='contact' className='w-full bg-oxford sm:p-12 flex justify-center'>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-4 w-5/6 max-w-4xl shadow-2xl rounded-2xl bg-orange-600 mt-24 mb-24 p-8'
+          className='space-y-4 sm:w-5/6 w-full max-w-4xl shadow-2xl sm:rounded-2xl bg-orange-600 mt-24 mb-24 p-8'
         >
             <h1 className='text-3xl font-bold text-center text-white'>Contact Me</h1>
           <FormField

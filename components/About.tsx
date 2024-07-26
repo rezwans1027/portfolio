@@ -5,11 +5,11 @@ const About = () => {
   return (
     <div
       id='about'
-      className='flex w-full items-center justify-center bg-white px-16 py-12'
+      className='flex w-full items-center justify-center bg-white sm:px-16 py-12'
     >
-      <div className='mt-24 max-w-4xl rounded-2xl bg-khaki p-8 shadow-xl'>
+      <div className='mt-24 max-w-4xl sm:rounded-2xl bg-khaki p-8 shadow-xl'>
         <h1 className='rounded-t-2xl p-4 text-5xl text-black'>About Me</h1>
-        <div className='bg-orange mt-8 rounded-2xl border-2 border-black p-4 text-lg text-black'>
+        <div className='bg-orange mt-8 sm:rounded-2xl border-2 border-black p-4 text-lg text-black'>
           <p className='mb-4'>
             Hello! I'm Rezwan Sheikh, a junior studying Computer Science. My journey in tech has been
             fueled by a passion for problem-solving and innovation, and a
