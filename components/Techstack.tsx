@@ -15,22 +15,24 @@ const Techstack = () => {
   return (
     <div className='w-full'>
       <div className='h-44 w-full bg-gradient-to-b from-khaki to-white'></div>
-      <div className='w-full bg-white'>
+      <div className='flex w-full flex-col items-center justify-center bg-white p-4'>
         <div className='text-center text-4xl'>
-          <h1 className='pt-12 text-oxford text-5xl font-extralight'>Toolbox</h1>
+          <h1 className='pt-12 text-5xl font-extralight text-oxford'>
+            Toolbox
+          </h1>
         </div>
-        <div className="pt-12 grid grid-cols-6 max-md:grid-cols-4 max-sm:grid-cols-3 max-xs:grid-cols-2 items-center gap-12 justify-items-center">
+        <div className='grid grid-cols-6 items-center justify-items-center gap-20 pt-12 max-md:grid-cols-4 max-sm:grid-cols-3 max-xs:grid-cols-2'>
           <CssLogo width={64} height={64} />
           <HtmlLogo width={64} height={64} />
           <JsLogo width={64} height={64} />
-          <NodeLogo width={64} height={64} />
           <ReactLogo width={64} height={64} />
+          <NodeLogo width={64} height={64} />
           <ExpressLogo width={64} height={64} />
           <NextLogo width={64} height={64} />
           <FirebaseLogo width={64} height={64} />
-          <JavaLogo width={64} height={64} />
-          <MongoLogo width={64} height={64} />
+          <MongoLogo width={64} height={64} />{' '}
           <PostgresqlLogo width={64} height={64} />
+          <JavaLogo width={64} height={64} />
           <PythonLogo width={64} height={64} />
         </div>
       </div>

@@ -32,6 +32,7 @@ const config = {
       },
       colors: {
         khaki: '#BDB69E',
+        khakiDark: '#989180',
         burg: '#88292F',
         oxford: '#142C52',
         border: 'hsl(var(--border))',

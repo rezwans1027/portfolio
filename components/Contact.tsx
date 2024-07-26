@@ -43,7 +43,7 @@ const Contact = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className='space-y-4 w-5/6 max-w-4xl shadow-2xl rounded-2xl bg-orange-600 mt-24 mb-12 p-8'
+          className='space-y-4 w-5/6 max-w-4xl shadow-2xl rounded-2xl bg-orange-600 mt-24 mb-24 p-8'
         >
             <h1 className='text-3xl font-bold text-center text-white'>Contact Me</h1>
           <FormField
