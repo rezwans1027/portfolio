@@ -92,7 +92,7 @@ const config = {
   },
   plugins: [
     require('tailwindcss-animate'),
-    function ({ addUtilities }) {
+    function ({ addUtilities }: { addUtilities: any }) {
       const newUtilities = {
         '.text-shadow-sm': {
           textShadow: '1px 1px 2px rgba(0, 0, 0, 0.25)',
