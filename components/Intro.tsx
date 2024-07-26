@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button'
-import LinkedIn from '/public/linkedin.svg'
+import LinkedIn from '../public/LinkedIn.svg'
 import Github from '../public/Github.svg'
 import Link from 'next/link'
 
@@ -25,8 +25,8 @@ const Intro = () => {
         <Link href='https://www.linkedin.com/in/rezwan-sheikh-68085a25b?utm_source=share&utm_campaign=share_via&utm_content=profile&utm_medium=ios_app' className='p-0 hover:bg-slate-600'>
           <LinkedIn width={40} height={40} />
         </Link>
-        <Link href='https://github.com/rezwans1027' className='bg-white px-2 hover:bg-slate-300'>
-          <Github width={24} height={32} />
+        <Link href='https://github.com/rezwans1027' className='bg-white rounded px-2 hover:bg-slate-300'>
+          <Github width={24} height={40} />
         </Link>
       </div>
     </div>
