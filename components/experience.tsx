@@ -82,7 +82,7 @@ export function Experience() {
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <motion.div
-                key={exp.company}
+                key={`${exp.company}-${exp.period}`}
                 variants={fadeIn}
                 className="relative"
               >
