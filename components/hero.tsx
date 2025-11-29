@@ -3,28 +3,14 @@
 import { motion } from "framer-motion"
 import { ArrowRight, Download, Mail } from "lucide-react"
 import Link from "next/link"
-
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.1,
-      delayChildren: 0.3,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, y: 20 },
-  show: { opacity: 1, y: 0 },
-}
+import { AnimatedButton } from "@/components/ui/animated-button"
+import { staggerContainer, fadeInUp } from "@/lib/motion-config"
 
 export function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen flex items-center justify-center relative overflow-hidden"
+      className="min-h-screen flex items-center justify-center relative overflow-hidden px-4 sm:px-6 lg:px-8"
     >
       {/* Animated background gradient - CSS optimized */}
       <div className="absolute inset-0 -z-10">
@@ -33,20 +19,20 @@ export function Hero() {
       </div>
 
       <motion.div
-        variants={container}
+        variants={staggerContainer(0.1, 0.3)}
         initial="hidden"
         animate="show"
-        className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center"
+        className="max-w-5xl mx-auto text-center"
       >
-        <motion.div variants={item} className="mb-6">
-          <span className="inline-block px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium mb-6">
+        <motion.div variants={fadeInUp} className="mb-8">
+          <span className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium">
             Available for opportunities
           </span>
         </motion.div>
 
         <motion.h1
-          variants={item}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-6 bg-clip-text text-transparent gradient-animate"
+          variants={fadeInUp}
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight bg-clip-text text-transparent gradient-animate"
           style={{
             backgroundImage: 'linear-gradient(90deg, hsl(var(--foreground)), hsl(271, 76%, 63%), hsl(280, 90%, 70%), hsl(271, 76%, 53%), hsl(var(--foreground)))'
           }}
@@ -55,64 +41,47 @@ export function Hero() {
         </motion.h1>
 
         <motion.p
-          variants={item}
-          className="text-xl sm:text-2xl md:text-3xl text-muted-foreground mb-4"
+          variants={fadeInUp}
+          className="text-2xl sm:text-3xl md:text-4xl font-semibold text-primary mb-6"
         >
-          Full Stack Developer
+          Full-Stack Software Engineer
         </motion.p>
 
         <motion.p
-          variants={item}
-          className="text-lg sm:text-xl text-foreground max-w-2xl mx-auto mb-12"
+          variants={fadeInUp}
+          className="text-lg sm:text-xl md:text-2xl text-muted-foreground max-w-3xl mx-auto mb-12 leading-relaxed"
         >
-          I build fast, reliable, user-centered systems with Next.js, NestJS, AI
-          integrations, and scalable product design.
+          Skilled in Next.js, React Native, Node, and TypeScript, with experience building secure and scalable web and mobile applications. Proven ability to ship production-quality projects and deliver end-to-end solutions.
         </motion.p>
 
         <motion.div
-          variants={item}
-          className="flex flex-col sm:flex-row gap-4 justify-center items-center"
+          variants={fadeInUp}
+          className="flex flex-col sm:flex-row gap-3 justify-center items-center max-w-2xl mx-auto"
         >
-          <Link href="#projects">
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="group px-8 py-4 bg-primary text-primary-foreground rounded-full font-medium flex items-center gap-2 hover:shadow-2xl hover:shadow-primary/50 transition-shadow duration-200"
-            >
-              View Projects
-              <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform duration-200" />
-            </motion.button>
+          <Link href="#projects" className="w-full sm:w-auto">
+            <AnimatedButton className="w-full sm:w-auto group">
+              <span className="relative z-10">View My Work</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform duration-200 relative z-10" />
+            </AnimatedButton>
           </Link>
 
-          <Link href="#contact">
-            <motion.button
-              whileHover={{ scale: 1.05, y: -2 }}
-              whileTap={{ scale: 0.95 }}
-              transition={{ duration: 0.2, ease: "easeOut" }}
-              className="px-8 py-4 glass text-foreground rounded-full font-medium flex items-center gap-2 hover:glass-strong"
-            >
-              <Mail className="w-5 h-5" />
-              Contact Me
-            </motion.button>
-          </Link>
+          <a href="/Rezwan_Sheikh_Resume.pdf" download className="w-full sm:w-auto">
+            <AnimatedButton variant="secondary" className="w-full sm:w-auto">
+              <Download className="w-4 h-4 relative z-10" />
+              <span className="relative z-10">Resume</span>
+            </AnimatedButton>
+          </a>
 
-          <motion.a
-            href="/resume.pdf"
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.05, y: -2 }}
-            whileTap={{ scale: 0.95 }}
-            transition={{ duration: 0.2, ease: "easeOut" }}
-            className="px-8 py-4 glass rounded-full font-medium flex items-center gap-2 hover:glass-strong"
-          >
-            <Download className="w-5 h-5" />
-            Resume
-          </motion.a>
+          <Link href="#contact" className="w-full sm:w-auto">
+            <AnimatedButton variant="secondary" className="w-full sm:w-auto">
+              <Mail className="w-4 h-4 relative z-10" />
+              <span className="relative z-10">Get In Touch</span>
+            </AnimatedButton>
+          </Link>
         </motion.div>
 
         <motion.div
-          variants={item}
+          variants={fadeInUp}
           className="mt-20"
         >
           <motion.div

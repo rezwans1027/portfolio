@@ -2,153 +2,147 @@
 
 import { motion } from "framer-motion"
 import { Briefcase, Calendar } from "lucide-react"
+import { SectionHeader } from "@/components/ui/section-header"
+import { GlassCard } from "@/components/ui/glass-card"
+import { staggerContainer, fadeIn } from "@/lib/motion-config"
 
 const experiences = [
   {
-    company: "IPG Health",
+    company: "Momen Technologies",
+    position: "Software Engineer",
+    period: "May 2025 - Present",
+    location: "Orlando, FL (Remote)",
+    description: "Building AI-powered mobile and web applications with React Native, Firebase, and LLM integrations.",
+    achievements: [
+      "Built an LLM-powered knowledge assistant with context-aware responses, cutting latency by 40% and scaling to 10K+ queries/day",
+      "Developed a React Native mobile app with Firebase Authentication, reducing login time by 30% and supporting 500+ concurrent users",
+      "Implemented a real-time AI chat interface with smooth animations and persistent sessions, enabling sub-200ms response times",
+    ],
+    tech: ["React Native", "Firebase", "LLM", "TypeScript", "NestJS"],
+  },
+  {
+    company: "Momen Technologies",
+    position: "Software Engineer",
+    period: "Feb 2025 - May 2025",
+    location: "Orlando, FL (Remote)",
+    description: "Developed and deployed AI systems with LLM fine-tuning, RAG pipelines, and scalable backend infrastructure.",
+    achievements: [
+      "Fine-tuned DeepSeek-Chat 7B with LoRA, improving response relevance by 30% and reducing memory and training time by 40%",
+      "Built a RAG pipeline with LangChain, MongoDB, and Pinecone, boosting factual accuracy by 20% and reducing hallucinations",
+      "Deployed a scalable NestJS backend on AWS EC2, reducing API response times by 35% through optimized load balancing and efficient request handling",
+    ],
+    tech: ["NestJS", "LangChain", "MongoDB", "Pinecone", "AWS EC2", "LoRA"],
+  },
+  {
+    company: "NEW EIC",
     position: "Software Engineering Intern",
-    period: "Summer 2024",
-    location: "Remote",
-    description: "Built task management calendar for internal dashboard, improving workflow clarity for 30+ employees.",
+    period: "Dec 2024 - Mar 2025",
+    location: "Boston, MA (Remote)",
+    description: "Architected enterprise management platforms with cloud storage, RBAC, and real-time collaboration features.",
     achievements: [
-      "Developed interactive calendar component using React and TypeScript",
-      "Integrated with backend API for real-time task synchronization",
-      "Improved team productivity by 25% through streamlined task visualization",
+      "Built a scalable interview management platform with cloud storage using MongoDB and AWS S3, achieving 3x faster retrieval and 70% lower storage usage",
+      "Architected a strategy management system with RBAC, real-time collaboration, and approval workflows, reducing approval time by 40%",
     ],
-    tech: ["React", "TypeScript", "Node.js", "PostgreSQL"],
+    tech: ["MongoDB", "AWS S3", "Node.js", "TypeScript"],
   },
   {
-    company: "ML4Fin Research Lab",
-    position: "Machine Learning Intern",
-    period: "Spring 2024",
-    location: "University",
-    description: "Researched and implemented ML models for financial data analysis and prediction.",
+    company: "Institute for Machine Learning",
+    position: "Software Engineering Intern",
+    period: "Sep 2024 - Dec 2024",
+    location: "Queens, NY",
+    description: "Built cloud infrastructure and time series models for real-time financial analytics on AWS.",
     achievements: [
-      "Developed predictive models for stock price analysis using Python and TensorFlow",
-      "Processed and analyzed large financial datasets with pandas and NumPy",
-      "Presented research findings to faculty and industry partners",
+      "Developed AWS infrastructure (EC2, RDS, Lambda) to improve scalability and system performance",
+      "Increased scalability by 40% and reduced data processing time by 25% through cloud infrastructure optimizations",
+      "Built time series models in Java, integrated econometric modules, and deployed real-time financial analytics",
     ],
-    tech: ["Python", "TensorFlow", "Pandas", "NumPy", "Jupyter"],
-  },
-  {
-    company: "Freelance Development",
-    position: "Full Stack Developer",
-    period: "2023 - Present",
-    location: "Remote",
-    description: "Building custom web applications and SaaS products for clients across various industries.",
-    achievements: [
-      "Delivered 10+ successful projects with 100% client satisfaction",
-      "Specialized in Next.js, NestJS, and cloud deployment solutions",
-      "Implemented payment integrations using Stripe and Plaid",
-    ],
-    tech: ["Next.js", "NestJS", "AWS", "Stripe", "MongoDB"],
+    tech: ["Java", "AWS EC2", "AWS RDS", "AWS Lambda", "Python"],
   },
 ]
 
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.2,
-    },
-  },
-}
-
-const item = {
-  hidden: { opacity: 0, x: -20 },
-  show: { opacity: 1, x: 0 },
-}
-
 export function Experience() {
   return (
-    <section id="experience" className="py-20 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.5 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl sm:text-5xl font-bold mb-4 bg-clip-text text-transparent gradient-animate" style={{ backgroundImage: 'linear-gradient(90deg, hsl(var(--foreground)), hsl(271, 76%, 63%), hsl(280, 90%, 70%), hsl(271, 76%, 53%), hsl(var(--foreground)))' }}>
-            Experience
-          </h2>
-          <p className="text-lg text-muted-foreground max-w-2xl mx-auto">
-            Building impactful solutions across different domains and technologies.
-          </p>
-        </motion.div>
+    <section id="experience" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
+        <SectionHeader
+          title="Experience"
+          subtitle="Building impactful solutions across different domains and technologies."
+        />
 
         <motion.div
-          variants={container}
+          variants={staggerContainer(0.2)}
           initial="hidden"
           whileInView="show"
           viewport={{ once: true }}
-          className="space-y-12 relative before:absolute before:inset-0 before:left-8 before:w-0.5 before:bg-border md:before:left-1/2"
+          className="relative"
         >
-          {experiences.map((exp, index) => (
-            <motion.div
-              key={exp.company}
-              variants={item}
-              className={`relative flex flex-col md:flex-row gap-8 ${
-                index % 2 === 0 ? "md:flex-row-reverse" : ""
-              }`}
-            >
-              {/* Timeline dot */}
-              <div className="absolute left-8 md:left-1/2 w-4 h-4 -ml-2 rounded-full bg-primary border-4 border-background z-10" />
+          {/* Vertical timeline line */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-1/2" />
 
-              {/* Content */}
-              <div className="md:w-1/2 ml-16 md:ml-0">
-                <motion.div
-                  whileHover={{ scale: 1.02, y: -4 }}
-                  transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="glass-card rounded-3xl p-6 hover:shadow-xl hover:shadow-primary/10 transition-shadow duration-200"
-                >
-                  <div className="flex items-start justify-between mb-4">
-                    <div>
-                      <h3 className="text-xl font-bold mb-1">{exp.position}</h3>
-                      <p className="text-primary font-medium">{exp.company}</p>
+          <div className="space-y-12">
+            {experiences.map((exp, index) => (
+              <motion.div
+                key={exp.company}
+                variants={fadeIn}
+                className="relative"
+              >
+                {/* Timeline dot */}
+                <div className="absolute left-0 md:left-1/2 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background transform -translate-x-2 md:-translate-x-2 z-10" />
+
+                {/* Content - alternating sides on desktop */}
+                <div className={`ml-8 md:ml-0 md:grid md:grid-cols-2 md:gap-8 ${
+                  index % 2 === 0 ? "" : "md:grid-flow-dense"
+                }`}>
+                  {/* Card */}
+                  <GlassCard
+                    className={`${index % 2 === 0 ? "md:col-start-2" : "md:col-start-1"}`}
+                  >
+                  <div className="flex items-start justify-between mb-5">
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-2 text-foreground">{exp.position}</h3>
+                      <p className="text-lg text-primary font-semibold">{exp.company}</p>
                     </div>
-                    <Briefcase className="w-6 h-6 text-primary" />
+                    <Briefcase className="w-7 h-7 text-primary flex-shrink-0 ml-4" />
                   </div>
 
-                  <div className="flex items-center gap-4 text-sm text-muted-foreground mb-4">
-                    <div className="flex items-center gap-1">
+                  <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-5">
+                    <div className="flex items-center gap-1.5">
                       <Calendar className="w-4 h-4" />
-                      {exp.period}
+                      <span>{exp.period}</span>
                     </div>
-                    <span>•</span>
+                    <span className="text-border">•</span>
                     <span>{exp.location}</span>
                   </div>
 
-                  <p className="text-muted-foreground mb-4">{exp.description}</p>
+                  <p className="text-base text-muted-foreground mb-5 leading-relaxed">{exp.description}</p>
 
-                  <ul className="space-y-2 mb-4">
+                  <div className="space-y-2.5 mb-6">
                     {exp.achievements.map((achievement, i) => (
-                      <li key={i} className="flex items-start gap-2 text-sm">
-                        <span className="text-primary mt-1">▹</span>
-                        <span>{achievement}</span>
-                      </li>
+                      <div key={i} className="flex items-start gap-3 text-sm leading-relaxed">
+                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
+                        <span className="text-foreground">{achievement}</span>
+                      </div>
                     ))}
-                  </ul>
+                  </div>
 
-                  <div className="flex flex-wrap gap-2">
+                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
                     {exp.tech.map((tech) => (
                       <span
                         key={tech}
-                        className="px-3 py-1 text-xs rounded-full bg-primary/10 text-primary"
+                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground"
                       >
                         {tech}
                       </span>
                     ))}
                   </div>
-                </motion.div>
-              </div>
+                  </GlassCard>
 
-              {/* Spacer for alternating layout */}
-              <div className="hidden md:block md:w-1/2" />
-            </motion.div>
-          ))}
+                  {/* Empty spacer for alternating layout */}
+                  <div className={`hidden md:block ${index % 2 === 0 ? "md:col-start-1" : "md:col-start-2"}`} />
+                </div>
+              </motion.div>
+            ))}
+          </div>
         </motion.div>
       </div>
     </section>
