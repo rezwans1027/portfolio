@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Code2, Lightbulb, Rocket, Target } from "lucide-react"
 import { SectionHeader } from "@/components/ui/section-header"
 import { GlassCard } from "@/components/ui/glass-card"
@@ -71,12 +71,23 @@ export function About() {
             transition={{ duration: 0.5 }}
             className="grid grid-cols-1 sm:grid-cols-2 gap-4"
           >
-            {highlights.map((highlight) => (
-              <GlassCard key={highlight.title}>
-                <highlight.icon className="w-10 h-10 text-primary mb-4" />
-                <h4 className="text-lg font-bold mb-3 text-foreground">{highlight.title}</h4>
-                <p className="text-base text-muted-foreground leading-relaxed">{highlight.description}</p>
-              </GlassCard>
+            {highlights.map((highlight, index) => (
+              <motion.div
+                key={highlight.title}
+                initial={{ opacity: 0, scale: 0.8, y: 20 }}
+                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ delay: index * 0.1, type: "spring", stiffness: 200, damping: 20 }}
+                whileHover={{ scale: 1.05, y: -4 }}
+              >
+                <GlassCard>
+                  <div>
+                    <highlight.icon className="w-10 h-10 text-primary mb-4" />
+                  </div>
+                  <h4 className="text-lg font-bold mb-3 text-foreground">{highlight.title}</h4>
+                  <p className="text-base text-muted-foreground leading-relaxed">{highlight.description}</p>
+                </GlassCard>
+              </motion.div>
             ))}
           </motion.div>
         </div>

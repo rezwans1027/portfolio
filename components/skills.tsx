@@ -1,9 +1,41 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { SectionHeader } from "@/components/ui/section-header"
 import { GlassCard } from "@/components/ui/glass-card"
 import { hoverScale } from "@/lib/motion-config"
+
+// Wave stagger animation variants
+const container = {
+  hidden: { opacity: 0 },
+  show: {
+    opacity: 1,
+    transition: {
+      staggerChildren: 0.05,
+      delayChildren: 0.1,
+    }
+  }
+}
+
+const categoryVariant = {
+  hidden: { opacity: 0, y: 30, scale: 0.9 },
+  show: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { type: "spring", stiffness: 250, damping: 20, duration: 0.3 }
+  }
+}
+
+const skillBadgeVariant = {
+  hidden: { opacity: 0, scale: 0.8, y: 10 },
+  show: {
+    opacity: 1,
+    scale: 1,
+    y: 0,
+    transition: { type: "spring", stiffness: 400, damping: 20, duration: 0.2 }
+  }
+}
 
 const skillCategories = [
   {
@@ -41,33 +73,50 @@ export function Skills() {
           subtitle="A comprehensive toolkit for building modern, scalable, and performant applications."
         />
 
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6, delay: 0.2 }}
-          className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
-        >
-          {skillCategories.map((category) => (
-            <GlassCard key={category.title}>
-              <h3 className="text-2xl font-bold mb-6 text-foreground">
-                {category.title}
-              </h3>
-              <div className="flex flex-wrap gap-2.5">
-                {category.skills.map((skill) => (
-                  <motion.span
-                    key={skill}
-                    whileHover={hoverScale}
-                    transition={{ duration: 0.2 }}
-                    className="px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default hover:bg-primary hover:text-primary-foreground transition-all duration-200"
-                  >
-                    {skill}
-                  </motion.span>
-                ))}
-              </div>
-            </GlassCard>
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {skillCategories.map((category, categoryIndex) => (
+            <motion.div
+              key={category.title}
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, margin: "-100px" }}
+              transition={{
+                delay: categoryIndex * 0.1,
+                duration: 0.4
+              }}
+            >
+              <GlassCard>
+                <h3 className="text-2xl font-bold mb-6 text-foreground">
+                  {category.title}
+                </h3>
+                <div className="flex flex-wrap gap-2.5">
+                  {category.skills.map((skill, skillIndex) => (
+                    <motion.span
+                      key={skill}
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{
+                        delay: categoryIndex * 0.1 + skillIndex * 0.03,
+                        duration: 0.2
+                      }}
+                      whileHover={{
+                        scale: 1.1,
+                        y: -4,
+                        backgroundColor: "hsl(var(--primary))",
+                        color: "hsl(var(--primary-foreground))",
+                        transition: { duration: 0.08, delay: 0 }
+                      }}
+                      whileTap={{ scale: 0.95 }}
+                      className="px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default"
+                    >
+                      {skill}
+                    </motion.span>
+                  ))}
+                </div>
+              </GlassCard>
+            </motion.div>
           ))}
-        </motion.div>
+        </div>
       </div>
     </section>
   )

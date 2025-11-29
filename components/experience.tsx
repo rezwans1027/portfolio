@@ -1,7 +1,8 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion, useScroll, useTransform } from "motion/react"
 import { Briefcase, Calendar } from "lucide-react"
+import { useRef } from "react"
 import { SectionHeader } from "@/components/ui/section-header"
 import { GlassCard } from "@/components/ui/glass-card"
 import { staggerContainer, fadeIn } from "@/lib/motion-config"
@@ -61,8 +62,16 @@ const experiences = [
 ]
 
 export function Experience() {
+  const sectionRef = useRef(null)
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start center", "end center"]
+  })
+
+  const lineHeight = useTransform(scrollYProgress, [0, 1], ["0%", "100%"])
+
   return (
-    <section id="experience" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8">
+    <section ref={sectionRef} id="experience" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8">
       <div className="max-w-6xl mx-auto">
         <SectionHeader
           title="Experience"
@@ -73,69 +82,111 @@ export function Experience() {
           variants={staggerContainer(0.2)}
           initial="hidden"
           whileInView="show"
-          viewport={{ once: true }}
+          viewport={{ once: true, margin: "-100px" }}
           className="relative"
         >
-          {/* Vertical timeline line */}
-          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-1/2" />
+          {/* Animated vertical timeline line */}
+          <div className="absolute left-0 md:left-1/2 top-0 bottom-0 w-0.5 bg-border transform md:-translate-x-1/2 overflow-hidden">
+            <motion.div
+              style={{ height: lineHeight, willChange: "transform" }}
+              className="w-full bg-gradient-to-b from-primary via-purple-500 to-primary"
+            />
+          </div>
 
           <div className="space-y-12">
             {experiences.map((exp, index) => (
               <motion.div
                 key={`${exp.company}-${exp.period}`}
-                variants={fadeIn}
+                initial={{ opacity: 0, x: index % 2 === 0 ? 50 : -50 }}
+                whileInView={{ opacity: 1, x: 0 }}
+                viewport={{ once: true, margin: "-50px" }}
+                transition={{ type: "spring", stiffness: 100, damping: 20, delay: index * 0.1 }}
                 className="relative"
               >
-                {/* Timeline dot */}
-                <div className="absolute left-0 md:left-1/2 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background transform -translate-x-2 md:-translate-x-2 z-10" />
+                {/* Animated timeline dot */}
+                <motion.div
+                  initial={{ scale: 0 }}
+                  whileInView={{ scale: 1 }}
+                  viewport={{ once: true }}
+                  transition={{ type: "spring", stiffness: 300, delay: index * 0.1 + 0.2 }}
+                  whileHover={{ scale: 1.5 }}
+                  className="absolute left-0 md:left-1/2 top-8 w-4 h-4 rounded-full bg-primary border-4 border-background transform -translate-x-2 md:-translate-x-2 z-10 cursor-pointer"
+                />
 
                 {/* Content - alternating sides on desktop */}
                 <div className={`ml-8 md:ml-0 md:grid md:grid-cols-2 md:gap-8 ${
                   index % 2 === 0 ? "" : "md:grid-flow-dense"
                 }`}>
                   {/* Card */}
-                  <GlassCard
+                  <motion.div
                     className={`${index % 2 === 0 ? "md:col-start-2" : "md:col-start-1"}`}
+                    whileHover={{ scale: 1.02, y: -4 }}
+                    transition={{ type: "spring", stiffness: 300, damping: 20 }}
                   >
-                  <div className="flex items-start justify-between mb-5">
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-2 text-foreground">{exp.position}</h3>
-                      <p className="text-lg text-primary font-semibold">{exp.company}</p>
-                    </div>
-                    <Briefcase className="w-7 h-7 text-primary flex-shrink-0 ml-4" />
-                  </div>
-
-                  <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-5">
-                    <div className="flex items-center gap-1.5">
-                      <Calendar className="w-4 h-4" />
-                      <span>{exp.period}</span>
-                    </div>
-                    <span className="text-border">•</span>
-                    <span>{exp.location}</span>
-                  </div>
-
-                  <p className="text-base text-muted-foreground mb-5 leading-relaxed">{exp.description}</p>
-
-                  <div className="space-y-2.5 mb-6">
-                    {exp.achievements.map((achievement, i) => (
-                      <div key={i} className="flex items-start gap-3 text-sm leading-relaxed">
-                        <div className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0" />
-                        <span className="text-foreground">{achievement}</span>
+                    <GlassCard>
+                    <div className="flex items-start justify-between mb-5">
+                      <div className="flex-1">
+                        <h3 className="text-2xl font-bold mb-2 text-foreground">{exp.position}</h3>
+                        <p className="text-lg text-primary font-semibold">{exp.company}</p>
                       </div>
-                    ))}
-                  </div>
-
-                  <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
-                    {exp.tech.map((tech) => (
-                      <span
-                        key={tech}
-                        className="px-3 py-1.5 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground"
+                      <motion.div
+                        whileHover={{ rotate: 360, scale: 1.2 }}
+                        transition={{ duration: 0.6 }}
                       >
-                        {tech}
-                      </span>
-                    ))}
-                  </div>
-                  </GlassCard>
+                        <Briefcase className="w-7 h-7 text-primary flex-shrink-0 ml-4" />
+                      </motion.div>
+                    </div>
+
+                    <div className="flex flex-wrap items-center gap-3 text-sm text-muted-foreground mb-5">
+                      <div className="flex items-center gap-1.5">
+                        <Calendar className="w-4 h-4" />
+                        <span>{exp.period}</span>
+                      </div>
+                      <span className="text-border">•</span>
+                      <span>{exp.location}</span>
+                    </div>
+
+                    <p className="text-base text-muted-foreground mb-5 leading-relaxed">{exp.description}</p>
+
+                    <div className="space-y-2.5 mb-6">
+                      {exp.achievements.map((achievement, i) => (
+                        <motion.div
+                          key={i}
+                          initial={{ opacity: 0, x: -10 }}
+                          whileInView={{ opacity: 1, x: 0 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.05, type: "spring", stiffness: 200 }}
+                          className="flex items-start gap-3 text-sm leading-relaxed"
+                        >
+                          <motion.div
+                            initial={{ scale: 0 }}
+                            whileInView={{ scale: 1 }}
+                            viewport={{ once: true }}
+                            transition={{ delay: i * 0.05 + 0.1, type: "spring", stiffness: 500 }}
+                            className="w-1.5 h-1.5 rounded-full bg-primary mt-2 flex-shrink-0"
+                          />
+                          <span className="text-foreground">{achievement}</span>
+                        </motion.div>
+                      ))}
+                    </div>
+
+                    <div className="flex flex-wrap gap-2 pt-4 border-t border-border">
+                      {exp.tech.map((tech, i) => (
+                        <motion.span
+                          key={tech}
+                          initial={{ opacity: 0, scale: 0.5 }}
+                          whileInView={{ opacity: 1, scale: 1 }}
+                          viewport={{ once: true }}
+                          transition={{ delay: i * 0.03, type: "spring", stiffness: 300 }}
+                          whileHover={{ scale: 1.1, y: -2 }}
+                          className="px-3 py-1.5 text-sm font-medium rounded-lg bg-secondary text-secondary-foreground cursor-default"
+                        >
+                          {tech}
+                        </motion.span>
+                      ))}
+                    </div>
+                    </GlassCard>
+                  </motion.div>
 
                   {/* Empty spacer for alternating layout */}
                   <div className={`hidden md:block ${index % 2 === 0 ? "md:col-start-1" : "md:col-start-2"}`} />

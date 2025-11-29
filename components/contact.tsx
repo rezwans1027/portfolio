@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { Github, Linkedin, Mail, Send } from "lucide-react"
 import Link from "next/link"
 import { SectionHeader } from "@/components/ui/section-header"
@@ -60,18 +60,29 @@ export function Contact() {
               >
                 <Link href={link.href} target="_blank" rel="noopener noreferrer">
                   <motion.div
-                    whileHover={hoverX}
-                    transition={{ duration: 0.15 }}
+                    whileHover={{ x: 8, scale: 1.02 }}
+                    whileTap={{ scale: 0.98 }}
+                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
                     className={`card-glossy flex items-center gap-4 p-5 rounded-2xl glass-card hover:glass-strong group ${link.color} transition-all duration-300`}
                   >
-                    <div className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200">
+                    <motion.div
+                      whileHover={{ scale: 1.2, rotate: 10 }}
+                      transition={{ type: "spring", stiffness: 300 }}
+                      className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200"
+                    >
                       <link.icon className="w-6 h-6" />
-                    </div>
+                    </motion.div>
                     <div className="flex-1">
                       <h3 className="font-semibold text-base mb-1 text-foreground">{link.name}</h3>
                       <p className="text-sm text-muted-foreground">{link.label}</p>
                     </div>
-                    <Send className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" />
+                    <motion.div
+                      initial={{ opacity: 0, x: -10 }}
+                      whileHover={{ opacity: 1, x: 0 }}
+                      transition={{ duration: 0.2 }}
+                    >
+                      <Send className="w-5 h-5" />
+                    </motion.div>
                   </motion.div>
                 </Link>
               </motion.div>
@@ -88,11 +99,13 @@ export function Contact() {
             <p className="text-base text-muted-foreground mb-6 font-medium">
               Open to internship and full-time opportunities
             </p>
-            <Link href="mailto:rezwanswe23@gmail.com">
-              <AnimatedButton className="px-8 py-4 rounded-2xl w-full sm:w-auto">
-                <span className="relative z-10">Send Me an Email</span>
-              </AnimatedButton>
-            </Link>
+            <div className="flex justify-center">
+              <Link href="mailto:rezwanswe23@gmail.com">
+                <AnimatedButton className="px-8 py-4 rounded-2xl">
+                  <span className="relative z-10">Send Me an Email</span>
+                </AnimatedButton>
+              </Link>
+            </div>
           </motion.div>
         </motion.div>
 

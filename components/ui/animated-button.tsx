@@ -1,13 +1,13 @@
 "use client"
 
-import { motion } from "framer-motion"
+import { motion } from "motion/react"
 import { ReactNode, ButtonHTMLAttributes } from "react"
 import { cn } from "@/lib/utils"
 import { hoverScaleSubtle, fastTransition } from "@/lib/motion-config"
 
 export type ButtonVariant = "primary" | "secondary" | "ghost"
 
-interface AnimatedButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
+interface AnimatedButtonProps extends Omit<ButtonHTMLAttributes<HTMLButtonElement>, 'onAnimationStart' | 'onDragStart' | 'onDragEnd' | 'onDrag'> {
   children: ReactNode
   variant?: ButtonVariant
   shiny?: boolean
