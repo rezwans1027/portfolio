@@ -379,3 +379,9 @@ section[id] {
   backdrop-filter: blur(24px);
   will-change: backdrop-filter;
 }
+
+/* Skill badge hover state - theme aware */
+.skill-badge-hover {
+  background-color: hsl(var(--primary)) !important;
+  color: hsl(var(--primary-foreground)) !important;
+}

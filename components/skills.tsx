@@ -1,6 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
+import { useState } from "react"
 import { SectionHeader } from "@/components/ui/section-header"
 import { GlassCard } from "@/components/ui/glass-card"
 import { hoverScale } from "@/lib/motion-config"
@@ -64,6 +65,35 @@ const skillCategories = [
   },
 ]
 
+function SkillBadge({ skill, categoryIndex, skillIndex }: { skill: string; categoryIndex: number; skillIndex: number }) {
+  const [isHovered, setIsHovered] = useState(false)
+
+  return (
+    <motion.span
+      key={skill}
+      initial={{ opacity: 0, scale: 0.8 }}
+      animate={{ opacity: 1, scale: 1 }}
+      transition={{
+        delay: categoryIndex * 0.1 + skillIndex * 0.03,
+        duration: 0.2
+      }}
+      whileHover={{
+        scale: 1.1,
+        y: -4,
+        transition: { duration: 0.08, delay: 0 }
+      }}
+      whileTap={{ scale: 0.95 }}
+      onHoverStart={() => setIsHovered(true)}
+      onHoverEnd={() => setIsHovered(false)}
+      className={`px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default transition-colors duration-75 ${
+        isHovered ? 'skill-badge-hover' : ''
+      }`}
+    >
+      {skill}
+    </motion.span>
+  )
+}
+
 export function Skills() {
   return (
     <section id="skills" className="w-full pt-20 pb-32 px-4 sm:px-6 lg:px-8 bg-muted/20">
@@ -91,26 +121,12 @@ export function Skills() {
                 </h3>
                 <div className="flex flex-wrap gap-2.5">
                   {category.skills.map((skill, skillIndex) => (
-                    <motion.span
+                    <SkillBadge
                       key={skill}
-                      initial={{ opacity: 0, scale: 0.8 }}
-                      animate={{ opacity: 1, scale: 1 }}
-                      transition={{
-                        delay: categoryIndex * 0.1 + skillIndex * 0.03,
-                        duration: 0.2
-                      }}
-                      whileHover={{
-                        scale: 1.1,
-                        y: -4,
-                        backgroundColor: "hsl(var(--primary))",
-                        color: "hsl(var(--primary-foreground))",
-                        transition: { duration: 0.08, delay: 0 }
-                      }}
-                      whileTap={{ scale: 0.95 }}
-                      className="px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default"
-                    >
-                      {skill}
-                    </motion.span>
+                      skill={skill}
+                      categoryIndex={categoryIndex}
+                      skillIndex={skillIndex}
+                    />
                   ))}
                 </div>
               </GlassCard>
