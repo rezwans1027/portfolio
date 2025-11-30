@@ -47,16 +47,6 @@ export function Hero() {
         animate="show"
         className="max-w-5xl mx-auto text-center"
       >
-        <motion.div variants={fadeInUp} className="mb-8">
-          <motion.span
-            className="inline-flex items-center px-4 py-2 rounded-full bg-primary/10 text-primary text-sm font-medium"
-            whileHover={{ scale: 1.05 }}
-            transition={{ type: "spring", stiffness: 400, damping: 17 }}
-          >
-            Available for opportunities
-          </motion.span>
-        </motion.div>
-
         {/* Word-by-word reveal with blur effect */}
         <motion.h1 className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-bold mb-8 leading-tight">
           {words.map((word, i) => (

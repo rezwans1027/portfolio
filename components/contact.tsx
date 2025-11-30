@@ -37,7 +37,7 @@ export function Contact() {
       <div className="max-w-4xl mx-auto">
         <SectionHeader
           title="Get In Touch"
-          subtitle="I'm currently looking for new opportunities. Whether you have a question or just want to say hi, feel free to reach out!"
+          subtitle="Whether you have a question or just want to say hi, feel free to reach out!"
         />
 
         <motion.div
@@ -62,12 +62,12 @@ export function Contact() {
                   <motion.div
                     whileHover={{ x: 8, scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
-                    transition={{ type: "spring", stiffness: 400, damping: 17 }}
+                    transition={{ duration: 0.08, ease: "easeOut" }}
                     className={`card-glossy flex items-center gap-4 p-5 rounded-2xl glass-card hover:glass-strong group ${link.color} transition-all duration-300`}
                   >
                     <motion.div
                       whileHover={{ scale: 1.2, rotate: 10 }}
-                      transition={{ type: "spring", stiffness: 300 }}
+                      transition={{ duration: 0.08, ease: "easeOut" }}
                       className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200"
                     >
                       <link.icon className="w-6 h-6" />
@@ -88,25 +88,6 @@ export function Contact() {
               </motion.div>
             ))}
           </div>
-
-          <motion.div
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-            className="mt-8 text-center"
-          >
-            <p className="text-base text-muted-foreground mb-6 font-medium">
-              Open to internship and full-time opportunities
-            </p>
-            <div className="flex justify-center">
-              <Link href="mailto:rezwanswe23@gmail.com">
-                <AnimatedButton className="px-8 py-4 rounded-2xl">
-                  <span className="relative z-10">Send Me an Email</span>
-                </AnimatedButton>
-              </Link>
-            </div>
-          </motion.div>
         </motion.div>
 
         <motion.footer

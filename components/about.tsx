@@ -57,9 +57,6 @@ export function About() {
               <p>
                 I'm <span className="text-foreground font-semibold">AWS Certified Solutions Architect - Associate</span> (Feb 2025) with expertise in AI/ML, full-stack development, and cloud infrastructure. My experience spans building secure authentication systems, real-time features, API integrations, and deploying scalable backends on AWS.
               </p>
-              <p className="text-foreground font-medium text-lg">
-                I'm seeking SWE internship or full-time opportunities where I can contribute to meaningful projects, solve complex problems, and deliver end-to-end solutions that create real value.
-              </p>
             </div>
           </motion.div>
 
@@ -78,15 +75,19 @@ export function About() {
                 whileInView={{ opacity: 1, scale: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ delay: index * 0.1, type: "spring", stiffness: 200, damping: 20 }}
-                whileHover={{ scale: 1.05, y: -4 }}
               >
-                <GlassCard>
-                  <div>
-                    <highlight.icon className="w-10 h-10 text-primary mb-4" />
-                  </div>
-                  <h4 className="text-lg font-bold mb-3 text-foreground">{highlight.title}</h4>
-                  <p className="text-base text-muted-foreground leading-relaxed">{highlight.description}</p>
-                </GlassCard>
+                <motion.div
+                  whileHover={{ scale: 1.05, y: -4 }}
+                  transition={{ duration: 0.15, ease: "easeOut" }}
+                >
+                  <GlassCard>
+                    <div>
+                      <highlight.icon className="w-10 h-10 text-primary mb-4" />
+                    </div>
+                    <h4 className="text-lg font-bold mb-3 text-foreground">{highlight.title}</h4>
+                    <p className="text-base text-muted-foreground leading-relaxed">{highlight.description}</p>
+                  </GlassCard>
+                </motion.div>
               </motion.div>
             ))}
           </motion.div>
