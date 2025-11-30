@@ -3,13 +3,14 @@
 import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "motion/react"
 import { ExternalLink, Github } from "lucide-react"
 import Link from "next/link"
-import { useRef, useState, useEffect } from "react"
+import { useRef, useState, useEffect, useCallback } from "react"
 import {
   Carousel,
   CarouselContent,
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  type CarouselApi,
 } from "@/components/ui/carousel"
 import { SectionHeader } from "@/components/ui/section-header"
 import { fadeInScale } from "@/lib/motion-config"
@@ -133,12 +134,7 @@ function ProjectCard({ project, index, hoveredProject, setHoveredProject }: Proj
 
   return (
     <CarouselItem key={project.title} className="pl-6 md:basis-1/2 lg:basis-1/3">
-      <motion.div
-        initial="hidden"
-        whileInView="show"
-        viewport={{ once: true }}
-        variants={fadeInScale}
-        transition={{ duration: 0.5, delay: index * 0.1, type: "spring", stiffness: 100 }}
+      <div
         className="h-full"
         onMouseEnter={() => setHoveredProject(project.title)}
         onMouseLeave={() => setHoveredProject(null)}
@@ -204,53 +200,62 @@ function ProjectCard({ project, index, hoveredProject, setHoveredProject }: Proj
             </div>
 
             <div className="flex gap-4 pt-4 border-t border-border">
-              <Link href={project.github}>
-                <motion.button
-                  whileHover={{ x: 4, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  className="flex items-center gap-2 text-sm font-medium text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  <Github className="w-4 h-4" />
-                  Code
-                </motion.button>
-              </Link>
-              <Link href={project.demo}>
-                <motion.button
-                  whileHover={{ x: 4, scale: 1.05 }}
-                  transition={{ type: "spring", stiffness: 400, damping: 17 }}
-                  className="flex items-center gap-2 text-sm font-medium text-primary hover:text-primary/80 transition-colors"
-                >
-                  <ExternalLink className="w-4 h-4" />
-                  Demo
-                </motion.button>
-              </Link>
+              <motion.button
+                disabled
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground/50 cursor-not-allowed"
+              >
+                <Github className="w-4 h-4" />
+                Code
+              </motion.button>
+              <motion.button
+                disabled
+                className="flex items-center gap-2 text-sm font-medium text-muted-foreground/50 cursor-not-allowed"
+              >
+                <ExternalLink className="w-4 h-4" />
+                Demo
+              </motion.button>
             </div>
           </div>
         </div>
-      </motion.div>
+      </div>
     </CarouselItem>
   )
 }
 
 export function Projects() {
   const [hoveredProject, setHoveredProject] = useState<string | null>(null)
+  const [api, setApi] = useState<CarouselApi>()
+  const [current, setCurrent] = useState(0)
+  const [count, setCount] = useState(0)
+
+  useEffect(() => {
+    if (!api) return
+
+    setCount(api.scrollSnapList().length)
+    setCurrent(api.selectedScrollSnap())
+
+    api.on("select", () => {
+      setCurrent(api.selectedScrollSnap())
+    })
+  }, [api])
 
   return (
-    <section id="projects" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8 overflow-visible">
+      <div className="max-w-7xl mx-auto px-4 md:px-8">
         <SectionHeader
           title="Featured Projects"
           subtitle="A selection of projects showcasing full-stack development, AI integration, and scalable product design."
         />
 
         <Carousel
+          setApi={setApi}
           opts={{
             align: "start",
             loop: false,
           }}
-          className="w-full"
+          className="w-full px-16 overflow-visible"
         >
-          <CarouselContent className="-ml-6">
+          <CarouselContent className="-ml-6 overflow-visible">
             {projects.map((project, index) => (
               <ProjectCard
                 key={project.title}
@@ -262,14 +267,32 @@ export function Projects() {
             ))}
           </CarouselContent>
           <CarouselPrevious
-            className="hidden md:flex glass-strong md:-left-4 border-border hover:bg-primary/20 h-11 w-11 z-10"
+            className="hidden md:flex glass-strong -left-12 border-border hover:bg-primary/20 h-11 w-11 z-10"
             aria-label="Previous project"
           />
           <CarouselNext
-            className="hidden md:flex glass-strong md:-right-4 border-border hover:bg-primary/20 h-11 w-11 z-10"
+            className="hidden md:flex glass-strong -right-12 border-border hover:bg-primary/20 h-11 w-11 z-10"
             aria-label="Next project"
           />
         </Carousel>
+
+        {/* Pagination Indicator */}
+        <div className="flex items-center justify-center gap-2 mt-8">
+          {Array.from({ length: count }).map((_, index) => (
+            <motion.button
+              key={index}
+              onClick={() => api?.scrollTo(index)}
+              className={`h-2 rounded-full transition-all ${
+                index === current
+                  ? "w-8 bg-primary"
+                  : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
+              }`}
+              whileHover={{ scale: 1.2 }}
+              whileTap={{ scale: 0.9 }}
+              aria-label={`Go to slide ${index + 1}`}
+            />
+          ))}
+        </div>
       </div>
     </section>
   )
