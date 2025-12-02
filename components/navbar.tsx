@@ -34,14 +34,23 @@ export function Navbar() {
           // Find the section whose top is closest to the navbar (accounting for scroll-margin-top)
           let currentSection = sections[0]
 
-          for (let i = sections.length - 1; i >= 0; i--) {
-            const element = document.getElementById(sections[i])
-            if (element) {
-              const rect = element.getBoundingClientRect()
-              // Check if this section has scrolled past the scroll threshold (100px + 20px buffer)
-              if (rect.top <= 120) {
-                currentSection = sections[i]
-                break
+          // Check if we're at the bottom of the page
+          const isAtBottom = window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 10
+
+          // If at bottom, highlight the last section
+          if (isAtBottom) {
+            currentSection = sections[sections.length - 1]
+          } else {
+            // Otherwise, find the section that's currently in view
+            for (let i = sections.length - 1; i >= 0; i--) {
+              const element = document.getElementById(sections[i])
+              if (element) {
+                const rect = element.getBoundingClientRect()
+                // Check if this section has scrolled past the scroll threshold (100px + 20px buffer)
+                if (rect.top <= 120) {
+                  currentSection = sections[i]
+                  break
+                }
               }
             }
           }
@@ -74,7 +83,7 @@ export function Navbar() {
           <motion.div
             whileHover={{ scale: 1.05 }}
             transition={{ duration: 0.2, ease: "easeOut" }}
-            className="text-xl font-bold bg-clip-text text-transparent gradient-animate"
+            className="text-xl font-bold bg-clip-text text-transparent gradient-animate flex items-center"
             style={{
               backgroundImage: 'linear-gradient(90deg, hsl(271, 76%, 53%), hsl(280, 90%, 70%), hsl(290, 80%, 60%), hsl(271, 76%, 53%))'
             }}
@@ -89,7 +98,7 @@ export function Navbar() {
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   transition={{ duration: 0.2, ease: "easeOut" }}
-                  className="relative px-4 py-2 rounded-lg"
+                  className="relative px-4 py-2 rounded-lg flex items-center justify-center"
                 >
                   <span
                     className={`relative z-10 ${

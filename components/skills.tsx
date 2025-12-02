@@ -67,25 +67,31 @@ const skillCategories = [
 
 function SkillBadge({ skill, categoryIndex, skillIndex }: { skill: string; categoryIndex: number; skillIndex: number }) {
   const [isHovered, setIsHovered] = useState(false)
+  const [hasAnimated, setHasAnimated] = useState(false)
 
   return (
     <motion.span
       key={skill}
       initial={{ opacity: 0, scale: 0.8 }}
       animate={{ opacity: 1, scale: 1 }}
-      transition={{
-        delay: categoryIndex * 0.1 + skillIndex * 0.03,
-        duration: 0.2
-      }}
+      transition={
+        hasAnimated
+          ? { duration: 0.15, ease: "easeOut" }
+          : {
+              delay: categoryIndex * 0.1 + skillIndex * 0.03,
+              duration: 0.2
+            }
+      }
+      onAnimationComplete={() => setHasAnimated(true)}
       whileHover={{
         scale: 1.1,
         y: -4,
-        transition: { duration: 0.08, delay: 0 }
+        transition: { duration: 0.15, ease: "easeOut" }
       }}
       whileTap={{ scale: 0.95 }}
       onHoverStart={() => setIsHovered(true)}
       onHoverEnd={() => setIsHovered(false)}
-      className={`px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default transition-colors duration-75 ${
+      className={`px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default transition-colors duration-75 inline-flex items-center justify-center ${
         isHovered ? 'skill-badge-hover' : ''
       }`}
     >
