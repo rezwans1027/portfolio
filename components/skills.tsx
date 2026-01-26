@@ -5,27 +5,27 @@ import { motion } from "motion/react"
 const skillCategories = [
   {
     title: "Languages",
-    skills: ["JavaScript", "TypeScript", "Python", "Java", "HTML", "CSS"],
+    skills: ["Java", "Python", "JavaScript", "TypeScript", "HTML", "CSS", "SQL"],
   },
   {
-    title: "Frontend",
-    skills: ["React", "Next.js", "React Native", "TailwindCSS"],
+    title: "Frameworks",
+    skills: ["React", "React Native", "Next.js", "Node.js", "Express", "NestJS", "TailwindCSS", "Socket.IO"],
   },
   {
-    title: "Backend",
-    skills: ["Node.js", "Express", "Nest.js", "MongoDB", "PostgreSQL", "Firebase"],
+    title: "Databases",
+    skills: ["PostgreSQL", "MongoDB", "Supabase", "Firebase", "Appwrite", "Redis", "Elasticsearch"],
   },
   {
-    title: "Cloud",
-    skills: ["AWS EC2", "AWS RDS", "AWS Lambda", "AWS S3", "Docker", "GitHub"],
+    title: "AI / ML",
+    skills: ["NLP", "Prompt Engineering", "RAG", "Agentic AI", "LangChain", "Pinecone", "Hugging Face"],
   },
   {
-    title: "AI/ML",
-    skills: ["RAG", "LLM Fine-Tuning", "LoRA/QLoRA", "LangChain", "Pinecone"],
+    title: "Cloud & CI/CD",
+    skills: ["AWS", "Docker", "GitHub Actions", "Jest", "Vitest", "Playwright"],
   },
   {
     title: "Tools",
-    skills: ["Supabase", "Appwrite", "Sentry", "Postman", "OpenAI", "HuggingFace"],
+    skills: ["Git", "Jira", "Postman", "Sentry"],
   },
 ]
 

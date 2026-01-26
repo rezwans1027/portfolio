@@ -13,40 +13,40 @@
     --foreground: 0 0% 4%;
     --card: 0 0% 98%;
     --card-foreground: 0 0% 4%;
-    --primary: 185 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 145 100% 40%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 20%;
     --muted: 0 0% 94%;
     --muted-foreground: 0 0% 40%;
-    --accent: 185 100% 50%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 145 100% 40%;
+    --accent-foreground: 0 0% 100%;
     --border: 0 0% 90%;
     --radius: 0px;
 
     /* Electric accent */
-    --electric: 185 100% 50%;
-    --electric-glow: 185 100% 60%;
+    --electric: 145 100% 40%;
+    --electric-glow: 145 100% 50%;
   }
 
   .dark {
-    /* Dark mode - Pure black with electric cyan */
+    /* Dark mode - Pure black with green */
     --background: 0 0% 2%;
     --foreground: 0 0% 98%;
     --card: 0 0% 4%;
     --card-foreground: 0 0% 98%;
-    --primary: 185 100% 50%;
-    --primary-foreground: 0 0% 0%;
+    --primary: 145 100% 40%;
+    --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 8%;
     --secondary-foreground: 0 0% 90%;
     --muted: 0 0% 12%;
     --muted-foreground: 0 0% 55%;
-    --accent: 185 100% 50%;
-    --accent-foreground: 0 0% 0%;
+    --accent: 145 100% 40%;
+    --accent-foreground: 0 0% 100%;
     --border: 0 0% 15%;
 
-    --electric: 185 100% 50%;
-    --electric-glow: 185 100% 65%;
+    --electric: 145 100% 40%;
+    --electric-glow: 145 100% 55%;
   }
 
   *,
@@ -191,7 +191,7 @@ section[id] {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     border: 2px solid hsl(var(--primary));
-    transition: all 0.15s ease;
+    transition: all 0.1s ease;
   }
 
   .btn-primary:hover {
@@ -210,7 +210,7 @@ section[id] {
     letter-spacing: 0.1em;
     text-transform: uppercase;
     border: 2px solid hsl(var(--foreground));
-    transition: all 0.15s ease;
+    transition: all 0.1s ease;
   }
 
   .btn-outline:hover {
@@ -324,7 +324,7 @@ section[id] {
 
   /* Gradient text */
   .text-gradient {
-    background: linear-gradient(135deg, hsl(var(--primary)), hsl(185 100% 70%));
+    background: linear-gradient(135deg, hsl(var(--primary)), hsl(160 100% 50%));
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;

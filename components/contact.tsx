@@ -14,8 +14,8 @@ const socialLinks = [
   {
     name: "LinkedIn",
     icon: Linkedin,
-    href: "https://www.linkedin.com/in/rezwan-sheikh-68085a25b",
-    label: "linkedin.com/in/rezwan-sheikh",
+    href: "https://www.linkedin.com/in/rezwansheikh23",
+    label: "linkedin.com/in/rezwansheikh23",
   },
   {
     name: "GitHub",
@@ -112,14 +112,10 @@ export function Contact() {
           {/* CTA */}
           <div className="mt-8 pt-8 border-t-2 border-border text-center">
             <Link href="mailto:rezwanswe23@gmail.com">
-              <motion.button
-                whileHover={{ scale: 1.02, x: 4 }}
-                whileTap={{ scale: 0.98 }}
-                className="btn-primary px-10 py-4 inline-flex items-center gap-3"
-              >
+              <button className="btn-primary px-10 py-4 inline-flex items-center gap-3">
                 <Mail className="w-4 h-4" />
                 <span>Send Email</span>
-              </motion.button>
+              </button>
             </Link>
           </div>
         </motion.div>

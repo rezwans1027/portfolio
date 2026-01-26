@@ -12,17 +12,17 @@ const highlights = [
   {
     icon: GraduationCap,
     title: "CS Student",
-    description: "St. John's University, 3.6 GPA",
+    description: "St. John's University, Dec 2026",
   },
   {
     icon: Cpu,
     title: "AI Specialist",
-    description: "LLM fine-tuning & RAG systems",
+    description: "RAG pipelines & agentic AI systems",
   },
   {
     icon: Zap,
-    title: "Fast Execution",
-    description: "Ship quality products quickly",
+    title: "Full-Stack",
+    description: "Web & mobile applications",
   },
 ]
 
@@ -70,13 +70,13 @@ export function About() {
             <p className="text-muted-foreground leading-relaxed">
               Computer Science student at{" "}
               <span className="text-foreground">St. John's University</span>{" "}
-              (3.6 GPA, Dec 2026) passionate about building elegant solutions to complex problems.
+              (Dec 2026) passionate about building elegant solutions to complex problems.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
               Currently at{" "}
               <span className="text-primary">Momen Technologies</span>{" "}
-              fine-tuning LLMs with LoRA, implementing RAG systems with LangChain and Pinecone, and building scalable cross-platform applications.
+              building agentic AI systems, implementing RAG pipelines with LangChain and Pinecone, and developing multi-tenant CRM platforms.
             </p>
 
             <p className="text-muted-foreground leading-relaxed">
@@ -87,9 +87,9 @@ export function About() {
             {/* Stats */}
             <div className="grid grid-cols-3 gap-4 pt-8 border-t-2 border-border">
               {[
-                { value: "3.6", label: "GPA" },
+                { value: "03+", label: "Years Exp" },
                 { value: "10+", label: "Projects" },
-                { value: "500+", label: "Users" },
+                { value: "10K+", label: "Queries/Day" },
               ].map((stat, index) => (
                 <motion.div
                   key={stat.label}

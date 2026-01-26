@@ -1,7 +1,7 @@
 "use client"
 
 import { motion, useScroll, useTransform } from "motion/react"
-import { ArrowRight, Download, ArrowDown } from "lucide-react"
+import { ArrowRight, Download } from "lucide-react"
 import Link from "next/link"
 import { useRef } from "react"
 
@@ -57,7 +57,7 @@ export function Hero() {
                 initial={{ opacity: 0, y: 40 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.5, delay: 0.3 }}
-                className="text-primary glow-text"
+                className="text-primary"
               >
                 Sheikh
               </motion.h1>
@@ -70,11 +70,10 @@ export function Hero() {
               transition={{ duration: 0.4, delay: 0.5 }}
               className="text-muted-foreground max-w-lg leading-relaxed text-base"
             >
-              Building secure, scalable applications with{" "}
-              <span className="text-primary">Next.js</span>,{" "}
-              <span className="text-primary">React Native</span>,{" "}
-              <span className="text-primary">NestJS</span>, and{" "}
-              <span className="text-primary">AI integrations</span>.
+              Full-stack engineer building{" "}
+              <span className="text-primary">AI-powered</span> web and mobile applications.
+              LLM assistants, RAG pipelines, and multi-tenant systems scaling to{" "}
+              <span className="text-primary">10K+ queries/day</span>.
             </motion.p>
 
             {/* CTA Buttons */}
@@ -85,25 +84,17 @@ export function Hero() {
               className="flex flex-wrap gap-4 pt-4"
             >
               <Link href="#projects">
-                <motion.button
-                  whileHover={{ scale: 1.02, x: 4 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-primary px-8 py-4 flex items-center gap-3 group"
-                >
+                <button className="btn-primary px-8 py-4 flex items-center gap-3 group">
                   <span>View Work</span>
-                  <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-                </motion.button>
+                  <ArrowRight className="w-4 h-4" />
+                </button>
               </Link>
 
               <Link href="/Rezwan_Sheikh_Resume.pdf" target="_blank">
-                <motion.button
-                  whileHover={{ scale: 1.02 }}
-                  whileTap={{ scale: 0.98 }}
-                  className="btn-outline px-8 py-4 flex items-center gap-3"
-                >
+                <button className="btn-outline px-8 py-4 flex items-center gap-3">
                   <Download className="w-4 h-4" />
                   <span>Resume</span>
-                </motion.button>
+                </button>
               </Link>
             </motion.div>
           </div>
@@ -139,24 +130,6 @@ export function Hero() {
           </div>
         </div>
 
-        {/* Scroll indicator */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ delay: 1.2, duration: 0.4 }}
-          className="absolute bottom-8 left-1/2 -translate-x-1/2"
-        >
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut" }}
-            className="flex flex-col items-center gap-2"
-          >
-            <span className="text-xs uppercase tracking-[0.3em] text-muted-foreground">
-              Scroll
-            </span>
-            <ArrowDown className="w-4 h-4 text-primary" />
-          </motion.div>
-        </motion.div>
       </motion.div>
 
       {/* Decorative elements */}
