@@ -1,11 +1,8 @@
 "use client"
 
 import { motion } from "motion/react"
-import { Github, Linkedin, Mail, Send } from "lucide-react"
+import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
-import { SectionHeader } from "@/components/ui/section-header"
-import { AnimatedButton } from "@/components/ui/animated-button"
-import { fadeInUp, fadeInLeft, hoverX } from "@/lib/motion-config"
 
 const socialLinks = [
   {
@@ -13,90 +10,136 @@ const socialLinks = [
     icon: Mail,
     href: "mailto:rezwanswe23@gmail.com",
     label: "rezwanswe23@gmail.com",
-    color: "hover:text-red-500",
   },
   {
     name: "LinkedIn",
     icon: Linkedin,
     href: "https://www.linkedin.com/in/rezwan-sheikh-68085a25b",
-    label: "linkedin.com/in/rezwan-sheikh-68085a25b",
-    color: "hover:text-blue-500",
+    label: "linkedin.com/in/rezwan-sheikh",
   },
   {
     name: "GitHub",
     icon: Github,
     href: "https://github.com/rezwans1027",
     label: "github.com/rezwans1027",
-    color: "hover:text-purple-500",
   },
 ]
 
 export function Contact() {
   return (
-    <section id="contact" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8">
+    <section id="contact" className="py-32 px-6 lg:px-8">
       <div className="max-w-4xl mx-auto">
-        <SectionHeader
-          title="Get In Touch"
-          subtitle="Whether you have a question or just want to say hi, feel free to reach out!"
-        />
+        {/* Section header */}
+        <div className="mb-16 text-center">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center justify-center gap-4 mb-6"
+          >
+            <div className="marker-line" />
+            <span className="section-number">05</span>
+            <span className="text-muted-foreground uppercase tracking-widest">
+              Connect
+            </span>
+            <div className="marker-line" />
+          </motion.div>
 
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-foreground"
+          >
+            Contact
+          </motion.h2>
+
+          <motion.p
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.2 }}
+            className="text-muted-foreground mt-6 max-w-md mx-auto"
+          >
+            Have a question or want to work together? Let's connect.
+          </motion.p>
+        </div>
+
+        {/* Contact links */}
         <motion.div
-          initial="hidden"
-          whileInView="show"
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          variants={fadeInUp}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="glass-strong rounded-3xl p-6 sm:p-8"
+          transition={{ duration: 0.4, delay: 0.3 }}
+          className="border-2 border-border p-8"
         >
           <div className="space-y-4">
             {socialLinks.map((link, index) => (
               <motion.div
                 key={link.name}
-                initial="hidden"
-                whileInView="show"
+                initial={{ opacity: 0, x: -20 }}
+                whileInView={{ opacity: 1, x: 0 }}
                 viewport={{ once: true }}
-                variants={fadeInLeft}
-                transition={{ delay: index * 0.1 }}
+                transition={{ delay: index * 0.1 + 0.4 }}
               >
-                <Link href={link.href} target="_blank" rel="noopener noreferrer">
-                  <motion.div
-                    whileHover={{ x: 8, scale: 1.02 }}
-                    whileTap={{ scale: 0.98 }}
-                    transition={{ duration: 0.08, ease: "easeOut" }}
-                    className={`card-glossy flex items-center gap-4 p-5 rounded-2xl glass-card hover:glass-strong group ${link.color} transition-all duration-300`}
-                  >
-                    <motion.div
-                      whileHover={{ scale: 1.2, rotate: 10 }}
-                      transition={{ duration: 0.08, ease: "easeOut" }}
-                      className="p-3 rounded-xl bg-primary/10 group-hover:bg-primary/20 transition-colors duration-200"
-                    >
-                      <link.icon className="w-6 h-6" />
-                    </motion.div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-base mb-1 text-foreground">{link.name}</h3>
-                      <p className="text-sm text-muted-foreground">{link.label}</p>
+                <Link
+                  href={link.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="group block"
+                >
+                  <div className="flex items-center gap-4 p-4 border-2 border-transparent hover:border-primary transition-colors duration-150">
+                    <div className="w-12 h-12 border-2 border-border flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-colors">
+                      <link.icon className="w-5 h-5 group-hover:text-background transition-colors" />
                     </div>
-                    <motion.div
-                      initial={{ opacity: 0, x: -10 }}
-                      whileHover={{ opacity: 1, x: 0 }}
-                      transition={{ duration: 0.2 }}
-                    >
-                      <Send className="w-5 h-5" />
-                    </motion.div>
-                  </motion.div>
+                    <div className="flex-1">
+                      <h3 className="font-semibold text-foreground uppercase tracking-tight text-sm">
+                        {link.name}
+                      </h3>
+                      <p className="text-muted-foreground text-xs mt-0.5">
+                        {link.label}
+                      </p>
+                    </div>
+                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:rotate-45 transition-all" />
+                  </div>
                 </Link>
               </motion.div>
             ))}
           </div>
+
+          {/* CTA */}
+          <div className="mt-8 pt-8 border-t-2 border-border text-center">
+            <Link href="mailto:rezwanswe23@gmail.com">
+              <motion.button
+                whileHover={{ scale: 1.02, x: 4 }}
+                whileTap={{ scale: 0.98 }}
+                className="btn-primary px-10 py-4 inline-flex items-center gap-3"
+              >
+                <Mail className="w-4 h-4" />
+                <span>Send Email</span>
+              </motion.button>
+            </Link>
+          </div>
         </motion.div>
 
+        {/* Footer */}
         <motion.footer
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          className="mt-24 pt-8 border-t border-border text-center text-base text-muted-foreground"
+          transition={{ delay: 0.6 }}
+          className="mt-24 pt-8 border-t-2 border-border"
         >
-          <p>© 2025 Rezwan Sheikh. Built with Next.js, Tailwind CSS, and Framer Motion.</p>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-muted-foreground">
+            <p className="text-xs uppercase tracking-wider">
+              &copy; {new Date().getFullYear()} Rezwan Sheikh
+            </p>
+            <p className="text-xs uppercase tracking-wider">
+              Built with Next.js + Tailwind + Framer Motion
+            </p>
+          </div>
         </motion.footer>
       </div>
     </section>

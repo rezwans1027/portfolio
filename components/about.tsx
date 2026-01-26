@@ -1,96 +1,137 @@
 "use client"
 
 import { motion } from "motion/react"
-import { Code2, Lightbulb, Rocket, Target } from "lucide-react"
-import { SectionHeader } from "@/components/ui/section-header"
-import { GlassCard } from "@/components/ui/glass-card"
-import { fadeInLeft, fadeInRight } from "@/lib/motion-config"
+import { Award, GraduationCap, Cpu, Zap } from "lucide-react"
 
 const highlights = [
   {
-    icon: Code2,
-    title: "Product-Minded Engineer",
-    description: "I don't just write code—I build solutions that solve real problems and create value for users.",
+    icon: Award,
+    title: "AWS Certified",
+    description: "Solutions Architect Associate",
   },
   {
-    icon: Lightbulb,
-    title: "Innovation Focused",
-    description: "Constantly exploring new technologies and approaches to build better, more efficient systems.",
+    icon: GraduationCap,
+    title: "CS Student",
+    description: "St. John's University, 3.6 GPA",
   },
   {
-    icon: Rocket,
+    icon: Cpu,
+    title: "AI Specialist",
+    description: "LLM fine-tuning & RAG systems",
+  },
+  {
+    icon: Zap,
     title: "Fast Execution",
-    description: "Shipping quality products quickly with modern tools like Next.js, NestJS, and cloud infrastructure.",
-  },
-  {
-    icon: Target,
-    title: "User-Centered",
-    description: "Every technical decision is made with the end user in mind, ensuring the best possible experience.",
+    description: "Ship quality products quickly",
   },
 ]
 
 export function About() {
   return (
-    <section id="about" className="w-full pt-20 pb-32 px-4 sm:px-6 lg:px-8 bg-muted/20">
+    <section id="about" className="py-32 px-6 lg:px-8 bg-card">
       <div className="max-w-6xl mx-auto">
-        <SectionHeader
-          title="About Me"
-          subtitle="Passionate about building great software and solving complex problems."
-        />
-
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
+        {/* Section header */}
+        <div className="mb-16">
           <motion.div
-            initial="hidden"
-            whileInView="show"
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            variants={fadeInLeft}
-            transition={{ duration: 0.5 }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center gap-4 mb-6"
           >
-            <h3 className="text-3xl font-bold mb-8 text-foreground">Building Software, Solving Problems</h3>
-            <div className="space-y-6 text-base text-muted-foreground leading-relaxed">
-              <p>
-                I'm a Computer Science student at <span className="text-foreground font-semibold">St. John's University</span> (GPA: 3.6/4.0, Expected Dec 2026) with a passion for creating elegant solutions to complex problems. My journey in software engineering has been driven by curiosity and a desire to build products that make a real impact.
-              </p>
-              <p>
-                Currently, I'm working at <span className="text-primary font-semibold">Momen Technologies</span> as a Software Engineer, where I'm fine-tuning LLMs with LoRA, implementing RAG systems with LangChain and Pinecone, and building scalable cross-platform applications with React Native and Firebase that serve 500+ concurrent users.
-              </p>
-              <p>
-                I'm <span className="text-foreground font-semibold">AWS Certified Solutions Architect - Associate</span> (Feb 2025) with expertise in AI/ML, full-stack development, and cloud infrastructure. My experience spans building secure authentication systems, real-time features, API integrations, and deploying scalable backends on AWS.
-              </p>
+            <div className="marker-line" />
+            <span className="section-number">04</span>
+            <span className="text-muted-foreground uppercase tracking-widest">
+              Background
+            </span>
+          </motion.div>
+
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-foreground"
+          >
+            About
+          </motion.h2>
+        </div>
+
+        {/* Content */}
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
+          {/* Bio */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="space-y-6"
+          >
+            <p className="text-muted-foreground leading-relaxed">
+              Computer Science student at{" "}
+              <span className="text-foreground">St. John's University</span>{" "}
+              (3.6 GPA, Dec 2026) passionate about building elegant solutions to complex problems.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              Currently at{" "}
+              <span className="text-primary">Momen Technologies</span>{" "}
+              fine-tuning LLMs with LoRA, implementing RAG systems with LangChain and Pinecone, and building scalable cross-platform applications.
+            </p>
+
+            <p className="text-muted-foreground leading-relaxed">
+              <span className="text-foreground">AWS Certified Solutions Architect</span>{" "}
+              with expertise in AI/ML, full-stack development, and cloud infrastructure.
+            </p>
+
+            {/* Stats */}
+            <div className="grid grid-cols-3 gap-4 pt-8 border-t-2 border-border">
+              {[
+                { value: "3.6", label: "GPA" },
+                { value: "10+", label: "Projects" },
+                { value: "500+", label: "Users" },
+              ].map((stat, index) => (
+                <motion.div
+                  key={stat.label}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: index * 0.1 + 0.3 }}
+                  className="text-center"
+                >
+                  <div className="text-3xl font-semibold text-primary tracking-tighter">
+                    {stat.value}
+                  </div>
+                  <div className="text-xs text-muted-foreground uppercase tracking-wider mt-1">
+                    {stat.label}
+                  </div>
+                </motion.div>
+              ))}
             </div>
           </motion.div>
 
-          <motion.div
-            initial="hidden"
-            whileInView="show"
-            viewport={{ once: true }}
-            variants={fadeInRight}
-            transition={{ duration: 0.5 }}
-            className="grid grid-cols-1 sm:grid-cols-2 gap-4"
-          >
+          {/* Highlights */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
             {highlights.map((highlight, index) => (
               <motion.div
                 key={highlight.title}
-                initial={{ opacity: 0, scale: 0.8, y: 20 }}
-                whileInView={{ opacity: 1, scale: 1, y: 0 }}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ delay: index * 0.1, type: "spring", stiffness: 200, damping: 20 }}
+                transition={{ delay: index * 0.1, duration: 0.4 }}
               >
-                <motion.div
-                  whileHover={{ scale: 1.05, y: -4 }}
-                  transition={{ duration: 0.15, ease: "easeOut" }}
-                >
-                  <GlassCard>
-                    <div>
-                      <highlight.icon className="w-10 h-10 text-primary mb-4" />
-                    </div>
-                    <h4 className="text-lg font-bold mb-3 text-foreground">{highlight.title}</h4>
-                    <p className="text-base text-muted-foreground leading-relaxed">{highlight.description}</p>
-                  </GlassCard>
-                </motion.div>
+                <div className="border-2 border-border p-6 h-full hover:border-primary transition-colors duration-150 group">
+                  <highlight.icon className="w-8 h-8 text-primary mb-4 group-hover:scale-110 transition-transform" />
+                  <h3 className="text-lg font-semibold text-foreground uppercase tracking-tight mb-2">
+                    {highlight.title}
+                  </h3>
+                  <p className="text-sm text-muted-foreground">
+                    {highlight.description}
+                  </p>
+                </div>
               </motion.div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
     </section>

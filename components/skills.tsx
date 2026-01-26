@@ -1,42 +1,6 @@
 "use client"
 
 import { motion } from "motion/react"
-import { useState } from "react"
-import { SectionHeader } from "@/components/ui/section-header"
-import { GlassCard } from "@/components/ui/glass-card"
-import { hoverScale } from "@/lib/motion-config"
-
-// Wave stagger animation variants
-const container = {
-  hidden: { opacity: 0 },
-  show: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.05,
-      delayChildren: 0.1,
-    }
-  }
-}
-
-const categoryVariant = {
-  hidden: { opacity: 0, y: 30, scale: 0.9 },
-  show: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: { type: "spring", stiffness: 250, damping: 20, duration: 0.3 }
-  }
-}
-
-const skillBadgeVariant = {
-  hidden: { opacity: 0, scale: 0.8, y: 10 },
-  show: {
-    opacity: 1,
-    scale: 1,
-    y: 0,
-    transition: { type: "spring", stiffness: 400, damping: 20, duration: 0.2 }
-  }
-}
 
 const skillCategories = [
   {
@@ -52,90 +16,96 @@ const skillCategories = [
     skills: ["Node.js", "Express", "Nest.js", "MongoDB", "PostgreSQL", "Firebase"],
   },
   {
-    title: "Cloud & DevOps",
+    title: "Cloud",
     skills: ["AWS EC2", "AWS RDS", "AWS Lambda", "AWS S3", "Docker", "GitHub"],
   },
   {
-    title: "AI / ML",
-    skills: ["RAG", "LLM Fine-Tuning", "LoRA/QLoRA", "LangChain", "Pinecone", "Prompt Engineering"],
+    title: "AI/ML",
+    skills: ["RAG", "LLM Fine-Tuning", "LoRA/QLoRA", "LangChain", "Pinecone"],
   },
   {
-    title: "Tools & Platforms",
-    skills: ["Supabase", "Appwrite", "Sentry", "Postman", "Jira", "VS Code", "OpenAI", "Hugging Face"],
+    title: "Tools",
+    skills: ["Supabase", "Appwrite", "Sentry", "Postman", "OpenAI", "HuggingFace"],
   },
 ]
 
-function SkillBadge({ skill, categoryIndex, skillIndex }: { skill: string; categoryIndex: number; skillIndex: number }) {
-  const [isHovered, setIsHovered] = useState(false)
-  const [hasAnimated, setHasAnimated] = useState(false)
-
-  return (
-    <motion.span
-      key={skill}
-      initial={{ opacity: 0, scale: 0.8 }}
-      animate={{ opacity: 1, scale: 1 }}
-      transition={
-        hasAnimated
-          ? { duration: 0.15, ease: "easeOut" }
-          : {
-              delay: categoryIndex * 0.1 + skillIndex * 0.03,
-              duration: 0.2
-            }
-      }
-      onAnimationComplete={() => setHasAnimated(true)}
-      whileHover={{
-        scale: 1.1,
-        y: -4,
-        transition: { duration: 0.15, ease: "easeOut" }
-      }}
-      whileTap={{ scale: 0.95 }}
-      onHoverStart={() => setIsHovered(true)}
-      onHoverEnd={() => setIsHovered(false)}
-      className={`px-4 py-2.5 bg-secondary text-secondary-foreground rounded-xl text-sm font-medium cursor-default transition-colors duration-75 inline-flex items-center justify-center ${
-        isHovered ? 'skill-badge-hover' : ''
-      }`}
-    >
-      {skill}
-    </motion.span>
-  )
-}
-
 export function Skills() {
   return (
-    <section id="skills" className="w-full pt-20 pb-32 px-4 sm:px-6 lg:px-8 bg-muted/20">
+    <section id="skills" className="py-32 px-6 lg:px-8 bg-card">
       <div className="max-w-7xl mx-auto">
-        <SectionHeader
-          title="Technical Skills"
-          subtitle="A comprehensive toolkit for building modern, scalable, and performant applications."
-        />
+        {/* Section header */}
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center gap-4 mb-6"
+          >
+            <div className="marker-line" />
+            <span className="section-number">02</span>
+            <span className="text-muted-foreground uppercase tracking-widest">
+              Expertise
+            </span>
+          </motion.div>
 
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-foreground"
+          >
+            Skills
+          </motion.h2>
+        </div>
+
+        {/* Skills grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
-              initial={{ opacity: 0, y: 20 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{
-                delay: categoryIndex * 0.1,
-                duration: 0.4
-              }}
+              viewport={{ once: true, margin: "-50px" }}
+              transition={{ duration: 0.4, delay: categoryIndex * 0.1 }}
+              className="group"
             >
-              <GlassCard>
-                <h3 className="text-2xl font-bold mb-6 text-foreground">
-                  {category.title}
-                </h3>
-                <div className="flex flex-wrap gap-2.5">
+              <div className="border-2 border-border p-6 h-full hover:border-primary transition-colors duration-150">
+                {/* Category header */}
+                <div className="flex items-center gap-3 mb-6">
+                  <span className="section-number">
+                    {String(categoryIndex + 1).padStart(2, "0")}
+                  </span>
+                  <h3 className="text-xl font-semibold text-foreground uppercase tracking-tight">
+                    {category.title}
+                  </h3>
+                </div>
+
+                {/* Skills */}
+                <div className="flex flex-wrap gap-2">
                   {category.skills.map((skill, skillIndex) => (
-                    <SkillBadge
+                    <motion.span
                       key={skill}
-                      skill={skill}
-                      categoryIndex={categoryIndex}
-                      skillIndex={skillIndex}
-                    />
+                      initial={{ opacity: 0, scale: 0.9 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      viewport={{ once: true }}
+                      transition={{
+                        delay: categoryIndex * 0.1 + skillIndex * 0.03,
+                        duration: 0.3
+                      }}
+                      whileHover={{
+                        backgroundColor: "hsl(var(--primary))",
+                        color: "hsl(var(--primary-foreground))",
+                        borderColor: "hsl(var(--primary))"
+                      }}
+                      className="skill-badge px-4 py-2 bg-transparent cursor-default"
+                    >
+                      {skill}
+                    </motion.span>
                   ))}
                 </div>
-              </GlassCard>
+              </div>
             </motion.div>
           ))}
         </div>

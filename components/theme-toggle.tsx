@@ -3,7 +3,7 @@
 import * as React from "react"
 import { Moon, Sun } from "lucide-react"
 import { useTheme } from "next-themes"
-import { motion } from "motion/react"
+import { motion, AnimatePresence } from "motion/react"
 
 export function ThemeToggle() {
   const { theme, setTheme } = useTheme()
@@ -14,40 +14,43 @@ export function ThemeToggle() {
   }, [])
 
   if (!mounted) {
-    return null
+    return (
+      <div className="w-10 h-10 border-2 border-border" />
+    )
   }
 
   return (
     <motion.button
       whileHover={{ scale: 1.05 }}
       whileTap={{ scale: 0.95 }}
-      transition={{ duration: 0.2, ease: "easeOut" }}
+      transition={{ duration: 0.15 }}
       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-      className="relative p-2 rounded-full glass hover:glass-strong"
+      className="relative w-10 h-10 border-2 border-foreground hover:border-primary hover:text-primary flex items-center justify-center transition-colors duration-150"
       aria-label="Toggle theme"
     >
-      <motion.div
-        initial={false}
-        animate={{
-          rotate: theme === "dark" ? 0 : 180,
-          scale: theme === "dark" ? 1 : 0,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="absolute inset-0 flex items-center justify-center"
-      >
-        <Moon className="h-5 w-5" />
-      </motion.div>
-      <motion.div
-        initial={false}
-        animate={{
-          rotate: theme === "light" ? 0 : -180,
-          scale: theme === "light" ? 1 : 0,
-        }}
-        transition={{ duration: 0.3, ease: "easeInOut" }}
-        className="flex items-center justify-center"
-      >
-        <Sun className="h-5 w-5" />
-      </motion.div>
+      <AnimatePresence mode="wait" initial={false}>
+        {theme === "dark" ? (
+          <motion.div
+            key="moon"
+            initial={{ opacity: 0, rotate: -90, scale: 0 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: 90, scale: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Moon className="h-4 w-4" />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="sun"
+            initial={{ opacity: 0, rotate: 90, scale: 0 }}
+            animate={{ opacity: 1, rotate: 0, scale: 1 }}
+            exit={{ opacity: 0, rotate: -90, scale: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <Sun className="h-4 w-4" />
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.button>
   )
 }

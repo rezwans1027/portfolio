@@ -1,59 +1,9 @@
 "use client"
 
-import { motion, useMotionValue, useSpring, useTransform, AnimatePresence } from "motion/react"
-import { ExternalLink, Github } from "lucide-react"
+import { motion } from "motion/react"
+import { ExternalLink, Github, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
-import { useRef, useState, useEffect, useCallback } from "react"
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-  type CarouselApi,
-} from "@/components/ui/carousel"
-import { SectionHeader } from "@/components/ui/section-header"
-import { fadeInScale } from "@/lib/motion-config"
-
-// 3D Tilt Card Component
-function TiltCard({ children, className }: { children: React.ReactNode; className?: string }) {
-  const ref = useRef<HTMLDivElement>(null)
-  const x = useMotionValue(0)
-  const y = useMotionValue(0)
-
-  const rotateX = useTransform(y, [-0.5, 0.5], [10, -10])
-  const rotateY = useTransform(x, [-0.5, 0.5], [-10, 10])
-
-  const handleMouse = (e: React.MouseEvent) => {
-    if (!ref.current) return
-    const rect = ref.current.getBoundingClientRect()
-    x.set((e.clientX - rect.left) / rect.width - 0.5)
-    y.set((e.clientY - rect.top) / rect.height - 0.5)
-  }
-
-  const reset = () => {
-    x.set(0)
-    y.set(0)
-  }
-
-  return (
-    <motion.div
-      ref={ref}
-      onMouseMove={handleMouse}
-      onMouseLeave={reset}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-        willChange: "transform"
-      }}
-      transition={{ type: "spring", stiffness: 400, damping: 30 }}
-      className={className}
-    >
-      {children}
-    </motion.div>
-  )
-}
+import { useState } from "react"
 
 type Project = {
   title: string
@@ -61,236 +11,174 @@ type Project = {
   tech: string[]
   github: string
   demo: string
-  image: string
+  category: string
 }
 
 const projects: Project[] = [
   {
     title: "DriveLeads",
-    description: "Built a multi-tenant lead management platform for salespeople with secure row-level access controls. Designed an automated lead intake pipeline with source tracking, validation, and status workflows. Implemented real-time performance analytics including lead volume, weekly/monthly trends, and source-based insights to optimize sales funnels.",
-    tech: ["Next.js", "React", "Tailwind CSS", "NestJS", "PostgreSQL", "Supabase"],
+    description: "Multi-tenant lead management platform with secure row-level access controls, automated intake pipeline, and real-time analytics.",
+    tech: ["Next.js", "NestJS", "PostgreSQL", "Supabase"],
     github: "#",
     demo: "#",
-    image: "bg-gradient-to-br from-emerald-500 to-teal-500",
+    category: "Full Stack",
   },
   {
     title: "Horizon",
-    description: "Developed a financial web application using Plaid for bank account linking and Dwolla for secure fund transfers. Implemented real-time error tracking with Sentry, reducing error resolution time by 50%.",
-    tech: ["React", "Next.js", "TailwindCSS", "Plaid", "Dwolla", "Appwrite", "Sentry"],
+    description: "Financial web app using Plaid for bank linking and Dwolla for secure transfers with real-time error tracking via Sentry.",
+    tech: ["React", "Next.js", "Plaid", "Dwolla"],
     github: "#",
     demo: "#",
-    image: "bg-gradient-to-br from-blue-500 to-cyan-500",
+    category: "FinTech",
   },
   {
-    title: "LLM Knowledge Assistant",
-    description: "Built an LLM-powered knowledge assistant with context-aware responses, cutting latency by 40% and scaling to 10K+ queries/day. Developed a React Native mobile app with Firebase Authentication supporting 500+ concurrent users.",
-    tech: ["React Native", "Firebase", "TypeScript", "NestJS", "LLM", "AI"],
+    title: "LLM Assistant",
+    description: "LLM-powered knowledge assistant with context-aware responses, 40% latency reduction, scaling to 10K+ daily queries.",
+    tech: ["React Native", "Firebase", "NestJS", "LLM"],
     github: "#",
     demo: "#",
-    image: "bg-gradient-to-br from-purple-500 to-pink-500",
+    category: "AI/Mobile",
   },
   {
     title: "ReceiptRanger",
-    description: "Built an expense management platform with bank integration and both manual and rule-based receipt verification. Implemented RBAC for admins, managers, and employees, enabling transaction approval workflows. Enhanced user onboarding with AWS SES automation, improving completion by 40%.",
-    tech: ["React", "Express", "Supabase", "Plaid", "AWS SES"],
+    description: "Expense management with bank integration, rule-based verification, and RBAC for approval workflows.",
+    tech: ["React", "Express", "Supabase", "Plaid"],
     github: "https://github.com/rezwans1027/RecieptRangerBackend",
     demo: "#",
-    image: "bg-gradient-to-br from-orange-500 to-red-500",
+    category: "Enterprise",
   },
   {
     title: "DevOverflow",
-    description: "Developed a Q&A application for coding questions with a recommendation system based on user interactions. Added real-time voting, pagination, filtering, and search features, reducing search times by 50%. Created MongoDB indexes improving query performance by 40%.",
-    tech: ["Next.js", "MongoDB", "Mongoose", "Clerk", "React"],
+    description: "Q&A platform for coding questions with recommendation system, real-time voting, and optimized search.",
+    tech: ["Next.js", "MongoDB", "Clerk", "React"],
     github: "https://github.com/rezwans1027/stackOverflowClone",
     demo: "#",
-    image: "bg-gradient-to-br from-indigo-500 to-purple-500",
+    category: "Community",
   },
   {
     title: "Goodeats",
-    description: "Created a restaurant app with menu search, filtering, seamless checkout, and admin panel for order management. Reduced image load time by 45% through Cloudinary optimization. Streamlined Stripe webhook processing, decreasing payment processing times by 25%.",
-    tech: ["Node.js", "Express", "MongoDB", "Stripe", "Auth0", "Cloudinary"],
+    description: "Restaurant app with menu search, checkout flow, and admin panel. Optimized images and payment processing.",
+    tech: ["Node.js", "Express", "MongoDB", "Stripe"],
     github: "https://github.com/rezwans1027/GoodEats-Backend",
     demo: "#",
-    image: "bg-gradient-to-br from-green-500 to-emerald-500",
+    category: "E-Commerce",
   },
 ]
 
-interface ProjectCardProps {
-  project: Project
-  index: number
-  hoveredProject: string | null
-  setHoveredProject: (title: string | null) => void
-}
-
-function ProjectCard({ project, index, hoveredProject, setHoveredProject }: ProjectCardProps) {
-  const contentRef = useRef<HTMLParagraphElement>(null)
-  const [contentHeight, setContentHeight] = useState(0)
-
-  useEffect(() => {
-    if (contentRef.current) {
-      setContentHeight(contentRef.current.scrollHeight)
-    }
-  }, [])
+function ProjectCard({ project, index }: { project: Project; index: number }) {
+  const [isHovered, setIsHovered] = useState(false)
 
   return (
-    <CarouselItem key={project.title} className="pl-6 md:basis-1/2 lg:basis-1/3">
-      <div
-        className="h-full"
-        onMouseEnter={() => setHoveredProject(project.title)}
-        onMouseLeave={() => setHoveredProject(null)}
-      >
-        <div className="card-glossy group relative glass-card rounded-3xl overflow-hidden hover:shadow-2xl hover:shadow-primary/20 transition-shadow duration-300 h-full">
-          <div className={`h-48 ${project.image} relative`}>
-            <div className="absolute inset-0 bg-gradient-to-t from-card via-card/50 to-transparent" />
+    <motion.div
+      initial={{ opacity: 0, y: 30 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      viewport={{ once: true, margin: "-50px" }}
+      transition={{ duration: 0.4, delay: index * 0.1 }}
+      onMouseEnter={() => setIsHovered(true)}
+      onMouseLeave={() => setIsHovered(false)}
+      className="group"
+    >
+      <div className={`card-brutal p-6 h-full ${isHovered ? "border-primary" : ""}`}>
+        {/* Header */}
+        <div className="flex items-start justify-between mb-4">
+          <div>
+            <span className="section-number">{String(index + 1).padStart(2, "0")}</span>
+            <span className="text-muted-foreground uppercase tracking-wider text-xs ml-2">
+              {project.category}
+            </span>
           </div>
+          <motion.div
+            animate={{ rotate: isHovered ? 45 : 0 }}
+            transition={{ duration: 0.2 }}
+          >
+            <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary transition-colors" />
+          </motion.div>
+        </div>
 
-          <div className="p-6">
-            <h3 className="text-xl font-bold mb-3 text-foreground group-hover:text-primary transition-colors">
-              {project.title}
-            </h3>
-            <div className="relative mb-6">
-              <motion.div
-                initial={false}
-                animate={{
-                  height: hoveredProject === project.title ? contentHeight : 72
-                }}
-                transition={{
-                  duration: 0.35,
-                  ease: [0.4, 0.0, 0.2, 1]
-                }}
-                className="overflow-hidden"
-                style={{
-                  maskImage: hoveredProject === project.title
-                    ? 'linear-gradient(to bottom, black 100%, black 100%)'
-                    : 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)',
-                  WebkitMaskImage: hoveredProject === project.title
-                    ? 'linear-gradient(to bottom, black 100%, black 100%)'
-                    : 'linear-gradient(to bottom, black 0%, black 60%, transparent 100%)'
-                }}
-              >
-                <p ref={contentRef} className="text-sm text-muted-foreground leading-relaxed">
-                  {project.description}
-                </p>
-              </motion.div>
-            </div>
+        {/* Title */}
+        <h3 className="text-2xl font-semibold text-foreground mb-4 group-hover:text-primary transition-colors">
+          {project.title}
+        </h3>
 
-            <div className="flex flex-wrap gap-2 mb-6">
-              {project.tech.slice(0, 3).map((tech, i) => (
-                <motion.span
-                  key={tech}
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: i * 0.05, type: "spring", stiffness: 200 }}
-                  whileHover={{ scale: 1.1, y: -2 }}
-                  className="px-3 py-1.5 text-xs font-medium rounded-lg bg-secondary text-secondary-foreground cursor-default"
-                >
-                  {tech}
-                </motion.span>
-              ))}
-              {project.tech.length > 3 && (
-                <motion.span
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  whileInView={{ opacity: 1, scale: 1 }}
-                  transition={{ delay: 0.15, type: "spring", stiffness: 200 }}
-                  className="px-3 py-1.5 text-xs font-medium rounded-lg bg-muted text-muted-foreground"
-                >
-                  +{project.tech.length - 3} more
-                </motion.span>
-              )}
-            </div>
+        {/* Description */}
+        <p className="text-muted-foreground leading-relaxed mb-6 text-sm">
+          {project.description}
+        </p>
 
-            <div className="flex gap-4 pt-4 border-t border-border">
-              <motion.button
-                disabled
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground/50 cursor-not-allowed"
-              >
-                <Github className="w-4 h-4" />
-                Code
-              </motion.button>
-              <motion.button
-                disabled
-                className="flex items-center gap-2 text-sm font-medium text-muted-foreground/50 cursor-not-allowed"
-              >
-                <ExternalLink className="w-4 h-4" />
-                Demo
-              </motion.button>
-            </div>
-          </div>
+        {/* Tech stack */}
+        <div className="flex flex-wrap gap-2 mb-6">
+          {project.tech.map((tech) => (
+            <span
+              key={tech}
+              className="skill-badge px-3 py-1.5 bg-transparent text-foreground"
+            >
+              {tech}
+            </span>
+          ))}
+        </div>
+
+        {/* Links */}
+        <div className="flex items-center gap-6 pt-4 border-t-2 border-border">
+          {project.github !== "#" ? (
+            <Link
+              href={project.github}
+              target="_blank"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group/link"
+            >
+              <Github className="w-4 h-4" />
+              <span className="link-underline">Code</span>
+            </Link>
+          ) : (
+            <span className="flex items-center gap-2 text-muted-foreground/40 cursor-not-allowed">
+              <Github className="w-4 h-4" />
+              <span>Private</span>
+            </span>
+          )}
+          <span className="flex items-center gap-2 text-muted-foreground/40 cursor-not-allowed">
+            <ExternalLink className="w-4 h-4" />
+            <span>Demo</span>
+          </span>
         </div>
       </div>
-    </CarouselItem>
+    </motion.div>
   )
 }
 
 export function Projects() {
-  const [hoveredProject, setHoveredProject] = useState<string | null>(null)
-  const [api, setApi] = useState<CarouselApi>()
-  const [current, setCurrent] = useState(0)
-  const [count, setCount] = useState(0)
-
-  useEffect(() => {
-    if (!api) return
-
-    setCount(api.scrollSnapList().length)
-    setCurrent(api.selectedScrollSnap())
-
-    api.on("select", () => {
-      setCurrent(api.selectedScrollSnap())
-    })
-  }, [api])
-
   return (
-    <section id="projects" className="pt-20 pb-32 px-4 sm:px-6 lg:px-8 overflow-visible">
-      <div className="max-w-7xl mx-auto px-4 md:px-8">
-        <SectionHeader
-          title="Featured Projects"
-          subtitle="A selection of projects showcasing full-stack development, AI integration, and scalable product design."
-        />
+    <section id="projects" className="py-32 px-6 lg:px-8">
+      <div className="max-w-7xl mx-auto">
+        {/* Section header */}
+        <div className="mb-16">
+          <motion.div
+            initial={{ opacity: 0, x: -20 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4 }}
+            className="flex items-center gap-4 mb-6"
+          >
+            <div className="marker-line" />
+            <span className="section-number">01</span>
+            <span className="text-muted-foreground uppercase tracking-widest">
+              Selected Work
+            </span>
+          </motion.div>
 
-        <Carousel
-          setApi={setApi}
-          opts={{
-            align: "start",
-            loop: false,
-          }}
-          className="w-full px-16 overflow-visible"
-        >
-          <CarouselContent className="-ml-6 overflow-visible">
-            {projects.map((project, index) => (
-              <ProjectCard
-                key={project.title}
-                project={project}
-                index={index}
-                hoveredProject={hoveredProject}
-                setHoveredProject={setHoveredProject}
-              />
-            ))}
-          </CarouselContent>
-          <CarouselPrevious
-            className="hidden md:flex glass-strong -left-12 border-border hover:bg-primary/20 h-11 w-11 z-10"
-            aria-label="Previous project"
-          />
-          <CarouselNext
-            className="hidden md:flex glass-strong -right-12 border-border hover:bg-primary/20 h-11 w-11 z-10"
-            aria-label="Next project"
-          />
-        </Carousel>
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            className="text-foreground"
+          >
+            Projects
+          </motion.h2>
+        </div>
 
-        {/* Pagination Indicator */}
-        <div className="flex items-center justify-center gap-2 mt-8">
-          {Array.from({ length: count }).map((_, index) => (
-            <motion.button
-              key={index}
-              onClick={() => api?.scrollTo(index)}
-              className={`h-2 rounded-full transition-all ${
-                index === current
-                  ? "w-8 bg-primary"
-                  : "w-2 bg-muted-foreground/30 hover:bg-muted-foreground/50"
-              }`}
-              whileHover={{ scale: 1.2 }}
-              whileTap={{ scale: 0.9 }}
-              aria-label={`Go to slide ${index + 1}`}
-            />
+        {/* Projects grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {projects.map((project, index) => (
+            <ProjectCard key={project.title} project={project} index={index} />
           ))}
         </div>
       </div>
