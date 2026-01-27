@@ -8,29 +8,29 @@
 
 @layer base {
   :root {
-    /* Light mode - Stark white with electric cyan */
+    /* Light mode - Stark white with sage green */
     --background: 0 0% 100%;
     --foreground: 0 0% 4%;
     --card: 0 0% 98%;
     --card-foreground: 0 0% 4%;
-    --primary: 145 100% 40%;
+    --primary: 106 17% 39%;
     --primary-foreground: 0 0% 100%;
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 20%;
     --muted: 0 0% 94%;
     --muted-foreground: 0 0% 40%;
-    --accent: 145 100% 40%;
+    --accent: 106 17% 39%;
     --accent-foreground: 0 0% 100%;
     --border: 0 0% 90%;
     --radius: 0px;
 
-    /* Electric accent */
-    --electric: 145 100% 40%;
-    --electric-glow: 145 100% 50%;
+    /* Accent */
+    --electric: 106 17% 39%;
+    --electric-glow: 106 22% 45%;
   }
 
   .dark {
-    /* Dark mode - Pure black with green */
+    /* Dark mode - Pure black with bright green */
     --background: 0 0% 2%;
     --foreground: 0 0% 98%;
     --card: 0 0% 4%;
