@@ -67,7 +67,7 @@ export function Experience() {
 
   return (
     <section ref={sectionRef} id="experience" className="py-32 px-6 lg:px-8">
-      <div className="max-w-5xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
           <motion.div
@@ -106,7 +106,7 @@ export function Experience() {
           </div>
 
           {/* Experience items */}
-          <div className="space-y-8">
+          <div className="space-y-6">
             {experiences.map((exp, index) => (
               <motion.div
                 key={`${exp.company}-${exp.period}`}

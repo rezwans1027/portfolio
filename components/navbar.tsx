@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { Menu, X } from "lucide-react"
 
 const navItems = [
-  { name: "Work", href: "#projects", num: "01" },
+  { name: "Projects", href: "#projects", num: "01" },
   { name: "Skills", href: "#skills", num: "02" },
   { name: "Experience", href: "#experience", num: "03" },
   { name: "About", href: "#about", num: "04" },
@@ -73,7 +73,7 @@ export function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
       >
-        <div className="max-w-7xl mx-auto px-6 lg:px-8">
+        <div className="max-w-6xl mx-auto px-6 lg:px-8">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
             <Link href="#home">

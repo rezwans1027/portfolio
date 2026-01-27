@@ -23,7 +23,7 @@ export function Hero() {
     >
       <motion.div
         style={{ opacity, y }}
-        className="max-w-7xl mx-auto px-6 lg:px-8 w-full py-20"
+        className="max-w-6xl mx-auto px-6 lg:px-8 w-full py-20"
       >
         {/* Grid layout */}
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-end">

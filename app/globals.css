@@ -99,7 +99,7 @@
     letter-spacing: -0.02em;
   }
 
-  /* Grid background pattern */
+  /* Subtle grid background pattern */
   body::before {
     content: "";
     position: fixed;
@@ -110,18 +110,18 @@
     background-image:
       linear-gradient(hsl(var(--border)) 1px, transparent 1px),
       linear-gradient(90deg, hsl(var(--border)) 1px, transparent 1px);
-    background-size: 60px 60px;
-    opacity: 0.5;
+    background-size: 80px 80px;
+    opacity: 0.25;
     z-index: -1;
     pointer-events: none;
   }
 
   .dark body::before {
-    opacity: 0.3;
+    opacity: 0.15;
   }
 }
 
-/* Scroll offset */
+/* Scroll offset - accounts for fixed navbar height */
 section[id] {
   scroll-margin-top: 80px;
 }

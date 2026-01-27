@@ -1,7 +1,7 @@
 "use client"
 
 import { motion } from "motion/react"
-import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react"
+import { Github, Linkedin, Mail } from "lucide-react"
 import Link from "next/link"
 
 const socialLinks = [
@@ -28,7 +28,7 @@ const socialLinks = [
 export function Contact() {
   return (
     <section id="contact" className="py-32 px-6 lg:px-8">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16 text-center">
           <motion.div
@@ -68,56 +68,51 @@ export function Contact() {
         </div>
 
         {/* Contact links */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          {socialLinks.map((link, index) => (
+            <motion.div
+              key={link.name}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
+            >
+              <Link
+                href={link.href}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group block h-full"
+              >
+                <div className="border-2 border-border p-6 h-full hover:border-primary transition-colors duration-150 text-center">
+                  <div className="w-14 h-14 border-2 border-border mx-auto flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-colors mb-4">
+                    <link.icon className="w-6 h-6 group-hover:text-background transition-colors" />
+                  </div>
+                  <h3 className="font-semibold text-foreground uppercase tracking-tight text-sm mb-2">
+                    {link.name}
+                  </h3>
+                  <p className="text-muted-foreground text-xs">
+                    {link.label}
+                  </p>
+                </div>
+              </Link>
+            </motion.div>
+          ))}
+        </div>
+
+        {/* CTA */}
         <motion.div
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.3 }}
-          className="border-2 border-border p-8"
+          transition={{ duration: 0.4, delay: 0.5 }}
+          className="mt-12 text-center"
         >
-          <div className="space-y-4">
-            {socialLinks.map((link, index) => (
-              <motion.div
-                key={link.name}
-                initial={{ opacity: 0, x: -20 }}
-                whileInView={{ opacity: 1, x: 0 }}
-                viewport={{ once: true }}
-                transition={{ delay: index * 0.1 + 0.4 }}
-              >
-                <Link
-                  href={link.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="group block"
-                >
-                  <div className="flex items-center gap-4 p-4 border-2 border-transparent hover:border-primary transition-colors duration-150">
-                    <div className="w-12 h-12 border-2 border-border flex items-center justify-center group-hover:border-primary group-hover:bg-primary transition-colors">
-                      <link.icon className="w-5 h-5 group-hover:text-background transition-colors" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="font-semibold text-foreground uppercase tracking-tight text-sm">
-                        {link.name}
-                      </h3>
-                      <p className="text-muted-foreground text-xs mt-0.5">
-                        {link.label}
-                      </p>
-                    </div>
-                    <ArrowUpRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:rotate-45 transition-all" />
-                  </div>
-                </Link>
-              </motion.div>
-            ))}
-          </div>
-
-          {/* CTA */}
-          <div className="mt-8 pt-8 border-t-2 border-border text-center">
-            <Link href="mailto:rezwanswe23@gmail.com">
-              <button className="btn-primary px-10 py-4 inline-flex items-center gap-3">
-                <Mail className="w-4 h-4" />
-                <span>Send Email</span>
-              </button>
-            </Link>
-          </div>
+          <Link href="mailto:rezwanswe23@gmail.com">
+            <button className="btn-primary px-10 py-4 inline-flex items-center gap-3">
+              <Mail className="w-4 h-4" />
+              <span>Send Email</span>
+            </button>
+          </Link>
         </motion.div>
 
         {/* Footer */}

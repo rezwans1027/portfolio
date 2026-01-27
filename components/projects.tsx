@@ -146,8 +146,8 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
 
 export function Projects() {
   return (
-    <section id="projects" className="py-32 px-6 lg:px-8">
-      <div className="max-w-7xl mx-auto">
+    <section id="projects" className="pt-8 pb-32 px-6 lg:px-8">
+      <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
           <motion.div

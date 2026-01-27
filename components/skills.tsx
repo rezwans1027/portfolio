@@ -32,7 +32,7 @@ const skillCategories = [
 export function Skills() {
   return (
     <section id="skills" className="py-32 px-6 lg:px-8 bg-card">
-      <div className="max-w-7xl mx-auto">
+      <div className="max-w-6xl mx-auto">
         {/* Section header */}
         <div className="mb-16">
           <motion.div
@@ -61,7 +61,7 @@ export function Skills() {
         </div>
 
         {/* Skills grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
           {skillCategories.map((category, categoryIndex) => (
             <motion.div
               key={category.title}
@@ -93,11 +93,6 @@ export function Skills() {
                       transition={{
                         delay: categoryIndex * 0.1 + skillIndex * 0.03,
                         duration: 0.3
-                      }}
-                      whileHover={{
-                        backgroundColor: "hsl(var(--primary))",
-                        color: "hsl(var(--primary-foreground))",
-                        borderColor: "hsl(var(--primary))"
                       }}
                       className="skill-badge px-4 py-2 bg-transparent cursor-default"
                     >
