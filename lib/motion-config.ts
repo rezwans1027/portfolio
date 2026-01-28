@@ -1,4 +1,4 @@
-import { Transition, Variants } from "motion/react"
+import { Transition, Variants } from "framer-motion"
 
 // Optimized default transition for better performance
 export const defaultTransition: Transition = {

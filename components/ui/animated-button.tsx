@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "motion/react"
+import { motion } from "framer-motion"
 import { ReactNode, ButtonHTMLAttributes } from "react"
 import { cn } from "@/lib/utils"
 import { hoverScaleSubtle, fastTransition } from "@/lib/motion-config"

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform, animate } from "motion/react"
+import { motion, useScroll, useTransform, animate } from "framer-motion"
 import { ArrowRight, Download } from "lucide-react"
 import Link from "next/link"
 import { useRef, useEffect, useState } from "react"

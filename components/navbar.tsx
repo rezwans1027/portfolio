@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useMotionValueEvent } from "motion/react"
+import { motion, useScroll, useMotionValueEvent } from "framer-motion"
 import Link from "next/link"
 import { ThemeToggle } from "./theme-toggle"
 import { useEffect, useState } from "react"

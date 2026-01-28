@@ -1,6 +1,6 @@
 "use client"
 
-import { motion } from "motion/react"
+import { motion } from "framer-motion"
 import { Github, Linkedin, Mail, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 
@@ -43,11 +43,8 @@ function ContactCard({ link, index }: { link: typeof socialLinks[0]; index: numb
         className="group block h-full"
       >
         <motion.div
-          className="border-2 border-border p-8 h-full text-center relative overflow-hidden"
-          whileHover={{
-            borderColor: "hsl(var(--primary))",
-            y: -5,
-          }}
+          className="border-2 border-border p-8 h-full text-center relative overflow-hidden group-hover:border-primary transition-colors"
+          whileHover={{ y: -5 }}
           transition={{ duration: 0.2 }}
         >
           {/* Background glow on hover */}
@@ -58,47 +55,18 @@ function ContactCard({ link, index }: { link: typeof socialLinks[0]; index: numb
             }}
           />
 
-          {/* Animated icon container */}
-          <motion.div
-            className="w-16 h-16 border-2 border-border mx-auto flex items-center justify-center mb-6 relative"
-            whileHover={{
-              borderColor: "hsl(var(--primary))",
-              rotate: 5,
-            }}
-            transition={{ duration: 0.2 }}
-          >
-            {/* Icon background fill on hover */}
-            <motion.div
-              className="absolute inset-0 bg-primary"
-              initial={{ scale: 0 }}
-              whileHover={{ scale: 1 }}
-              transition={{ duration: 0.2 }}
-            />
-            <motion.div
-              className="relative z-10"
-              whileHover={{ scale: 1.1, rotate: -5 }}
-              transition={{ duration: 0.2 }}
-            >
-              <link.icon className="w-7 h-7 group-hover:text-background transition-colors duration-200" />
-            </motion.div>
-          </motion.div>
-
-          {/* Name with arrow */}
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <h3 className="font-semibold text-foreground uppercase tracking-tight text-sm group-hover:text-primary transition-colors">
-              {link.name}
-            </h3>
-            <motion.div
-              initial={{ opacity: 0, x: -5 }}
-              whileHover={{ opacity: 1, x: 0 }}
-              className="opacity-0 group-hover:opacity-100 transition-opacity"
-            >
-              <ArrowUpRight className="w-4 h-4 text-primary" />
-            </motion.div>
+          {/* Icon container */}
+          <div className="w-16 h-16 border-2 border-border mx-auto flex items-center justify-center mb-6 group-hover:border-primary transition-colors">
+            <link.icon className="w-7 h-7 group-hover:text-primary transition-colors duration-200" />
           </div>
 
+          {/* Name */}
+          <h3 className="font-semibold text-foreground uppercase tracking-tight text-sm group-hover:text-primary transition-colors text-center mb-2">
+            {link.name}
+          </h3>
+
           {/* Label */}
-          <p className="text-muted-foreground text-xs group-hover:text-foreground transition-colors">
+          <p className="text-muted-foreground text-xs group-hover:text-foreground transition-colors text-center">
             {link.label}
           </p>
 
@@ -189,40 +157,6 @@ export function Contact() {
           ))}
         </div>
 
-        {/* CTA with animated button */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.4, delay: 0.5 }}
-          className="mt-16 text-center"
-        >
-          <Link href="mailto:rezwanswe23@gmail.com">
-            <motion.button
-              className="btn-primary px-12 py-5 inline-flex items-center gap-3 relative overflow-hidden group"
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-            >
-              {/* Animated shine effect */}
-              <motion.div
-                className="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent"
-                initial={{ x: "-100%" }}
-                whileHover={{ x: "100%" }}
-                transition={{ duration: 0.5 }}
-              />
-              <Mail className="w-5 h-5 relative z-10" />
-              <span className="relative z-10">Send Email</span>
-              <motion.span
-                className="relative z-10"
-                animate={{ x: [0, 4, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                <ArrowUpRight className="w-4 h-4" />
-              </motion.span>
-            </motion.button>
-          </Link>
-        </motion.div>
-
         {/* Footer */}
         <motion.footer
           initial={{ opacity: 0 }}
@@ -232,23 +166,17 @@ export function Contact() {
           className="mt-24 pt-8 border-t-2 border-border"
         >
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-muted-foreground">
-            <motion.p
-              className="text-xs uppercase tracking-wider"
-              whileHover={{ color: "hsl(var(--foreground))" }}
-            >
+            <p className="text-xs uppercase tracking-wider hover:text-foreground transition-colors">
               &copy; {new Date().getFullYear()} Rezwan Sheikh
-            </motion.p>
-            <motion.p
-              className="text-xs uppercase tracking-wider flex items-center gap-2"
-              whileHover={{ color: "hsl(var(--foreground))" }}
-            >
+            </p>
+            <p className="text-xs uppercase tracking-wider flex items-center gap-2 hover:text-foreground transition-colors">
               <span>Built with</span>
               <span className="text-primary">Next.js</span>
               <span>+</span>
               <span className="text-primary">Tailwind</span>
               <span>+</span>
               <span className="text-primary">Framer Motion</span>
-            </motion.p>
+            </p>
           </div>
         </motion.footer>
       </div>

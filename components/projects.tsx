@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useMotionValue, useSpring, useTransform } from "motion/react"
+import { motion, useInView } from "framer-motion"
 import { ExternalLink, Github, ArrowUpRight } from "lucide-react"
 import Link from "next/link"
 import { useRef } from "react"
@@ -67,33 +67,7 @@ const projects: Project[] = [
 
 function ProjectCard({ project, index }: { project: Project; index: number }) {
   const cardRef = useRef<HTMLDivElement>(null)
-
-  // Mouse position for tilt effect
-  const mouseX = useMotionValue(0)
-  const mouseY = useMotionValue(0)
-
-  // Smooth spring animation
-  const springConfig = { stiffness: 150, damping: 15 }
-  const rotateX = useSpring(useTransform(mouseY, [-0.5, 0.5], [8, -8]), springConfig)
-  const rotateY = useSpring(useTransform(mouseX, [-0.5, 0.5], [-8, 8]), springConfig)
-
-  // Shine effect position
-  const shineX = useSpring(useTransform(mouseX, [-0.5, 0.5], [0, 100]), springConfig)
-  const shineY = useSpring(useTransform(mouseY, [-0.5, 0.5], [0, 100]), springConfig)
-
-  const handleMouseMove = (e: React.MouseEvent) => {
-    if (!cardRef.current) return
-    const rect = cardRef.current.getBoundingClientRect()
-    const x = (e.clientX - rect.left) / rect.width - 0.5
-    const y = (e.clientY - rect.top) / rect.height - 0.5
-    mouseX.set(x)
-    mouseY.set(y)
-  }
-
-  const handleMouseLeave = () => {
-    mouseX.set(0)
-    mouseY.set(0)
-  }
+  const isInView = useInView(cardRef, { once: true, margin: "-50px" })
 
   return (
     <motion.div
@@ -102,33 +76,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: "-50px" }}
       transition={{ duration: 0.4, delay: index * 0.1 }}
-      onMouseMove={handleMouseMove}
-      onMouseLeave={handleMouseLeave}
-      style={{
-        rotateX,
-        rotateY,
-        transformStyle: "preserve-3d",
-        perspective: 1000,
-      }}
       className="group cursor-default"
     >
-      <motion.div
-        className="card-brutal p-6 h-full relative overflow-hidden"
-        whileHover={{ borderColor: "hsl(var(--primary))" }}
+      <div
+        className="card-brutal p-6 h-full relative overflow-hidden group-hover:border-primary transition-colors"
       >
-        {/* Animated shine effect */}
-        <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 transition-opacity duration-300 pointer-events-none"
-          style={{
-            background: `radial-gradient(circle at ${shineX}% ${shineY}%, hsl(var(--primary) / 0.15) 0%, transparent 50%)`,
-          }}
-        />
 
-        {/* Animated corner accent */}
-        <motion.div
-          className="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-l-[40px] border-t-primary/0 border-l-transparent"
-          whileHover={{ borderTopColor: "hsl(var(--primary) / 0.3)" }}
-          transition={{ duration: 0.2 }}
+        {/* Corner accent */}
+        <div
+          className="absolute top-0 right-0 w-0 h-0 border-t-[40px] border-l-[40px] border-t-transparent group-hover:border-t-primary/30 border-l-transparent transition-colors"
         />
 
         {/* Header */}
@@ -168,23 +124,15 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           {project.description}
         </p>
 
-        {/* Tech stack with staggered animation */}
+        {/* Tech stack */}
         <div className="flex flex-wrap gap-2 mb-6 relative z-10">
-          {project.tech.map((tech, techIndex) => (
-            <motion.span
+          {project.tech.map((tech) => (
+            <span
               key={tech}
-              initial={{ opacity: 0, scale: 0.8 }}
-              whileInView={{ opacity: 1, scale: 1 }}
-              viewport={{ once: true }}
-              transition={{ delay: index * 0.1 + techIndex * 0.05 }}
-              whileHover={{
-                y: -2,
-                transition: { duration: 0.15 }
-              }}
-              className="skill-badge px-3 py-1.5 bg-transparent text-foreground"
+              className="skill-badge px-3 py-1.5 bg-transparent text-foreground hover:-translate-y-0.5"
             >
               {tech}
-            </motion.span>
+            </span>
           ))}
         </div>
 
@@ -213,15 +161,7 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
           </span>
         </div>
 
-        {/* Animated border glow on hover */}
-        <motion.div
-          className="absolute inset-0 opacity-0 group-hover:opacity-100 pointer-events-none"
-          style={{
-            boxShadow: "inset 0 0 30px hsl(var(--primary) / 0.1)",
-          }}
-          transition={{ duration: 0.3 }}
-        />
-      </motion.div>
+      </div>
     </motion.div>
   )
 }

@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useInView } from "motion/react"
+import { motion, useInView } from "framer-motion"
 import { useRef } from "react"
 
 const skillCategories = [
@@ -30,32 +30,6 @@ const skillCategories = [
   },
 ]
 
-function SkillBadge({ skill, delay }: { skill: string; delay: number }) {
-  return (
-    <motion.span
-      initial={{ opacity: 0, y: 20, scale: 0.8 }}
-      whileInView={{ opacity: 1, y: 0, scale: 1 }}
-      viewport={{ once: true }}
-      transition={{
-        delay: delay * 0.6,
-        duration: 0.25,
-        type: "spring",
-        stiffness: 150,
-      }}
-      className="skill-badge px-4 py-2 bg-transparent cursor-default relative overflow-hidden group/skill"
-    >
-      {/* Animated background on hover */}
-      <motion.span
-        className="absolute inset-0 bg-primary/0 group-hover/skill:bg-primary transition-colors duration-200"
-        initial={false}
-      />
-      <span className="relative z-10 group-hover/skill:text-primary-foreground transition-colors duration-200">
-        {skill}
-      </span>
-    </motion.span>
-  )
-}
-
 function SkillCategory({ category, categoryIndex }: { category: typeof skillCategories[0]; categoryIndex: number }) {
   const ref = useRef(null)
   const isInView = useInView(ref, { once: true, margin: "-100px" })
@@ -69,9 +43,7 @@ function SkillCategory({ category, categoryIndex }: { category: typeof skillCate
       className="group"
     >
       <motion.div
-        className="border-2 border-border p-6 h-full relative overflow-hidden"
-        whileHover={{ borderColor: "hsl(var(--primary))" }}
-        transition={{ duration: 0.15 }}
+        className="border-2 border-border p-6 h-full relative overflow-hidden group-hover:border-primary transition-colors"
       >
         {/* Animated corner decoration */}
         <motion.div
@@ -101,14 +73,18 @@ function SkillCategory({ category, categoryIndex }: { category: typeof skillCate
           </motion.h3>
         </div>
 
-        {/* Skills with wave animation */}
+        {/* Skills */}
         <div className="flex flex-wrap gap-2">
-          {category.skills.map((skill, skillIndex) => (
-            <SkillBadge
+          {category.skills.map((skill) => (
+            <span
               key={skill}
-              skill={skill}
-              delay={categoryIndex * 0.06 + skillIndex * 0.03 + 0.15}
-            />
+              className="skill-badge px-4 py-2 bg-transparent cursor-default relative overflow-hidden group/skill"
+            >
+              <span className="absolute inset-0 bg-primary/0 group-hover/skill:bg-primary transition-colors duration-200" />
+              <span className="relative z-10 group-hover/skill:text-primary-foreground transition-colors duration-200">
+                {skill}
+              </span>
+            </span>
           ))}
         </div>
 

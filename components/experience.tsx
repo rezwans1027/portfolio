@@ -1,6 +1,6 @@
 "use client"
 
-import { motion, useScroll, useTransform, useInView } from "motion/react"
+import { motion, useScroll, useTransform, useInView } from "framer-motion"
 import { MapPin, Briefcase } from "lucide-react"
 import { useRef } from "react"
 
@@ -99,11 +99,8 @@ function ExperienceCard({ exp, index }: { exp: typeof experiences[0]; index: num
 
       {/* Card */}
       <motion.div
-        className="card-brutal p-6 relative overflow-hidden"
-        whileHover={{
-          borderColor: "hsl(var(--primary))",
-          x: 4,
-        }}
+        className="card-brutal p-6 relative overflow-hidden group-hover:border-primary transition-colors"
+        whileHover={{ x: 4 }}
         transition={{ duration: 0.2 }}
       >
         {/* Current role indicator */}
@@ -179,25 +176,16 @@ function ExperienceCard({ exp, index }: { exp: typeof experiences[0]; index: num
         </div>
 
         {/* Tech stack */}
-        <motion.div
-          className="flex flex-wrap gap-2 pt-4 border-t-2 border-border"
-          initial={{ opacity: 0 }}
-          animate={isInView ? { opacity: 1 } : { opacity: 0 }}
-          transition={{ delay: index * 0.08 + 0.25 }}
-        >
-          {exp.tech.map((tech, techIndex) => (
-            <motion.span
+        <div className="flex flex-wrap gap-2 pt-4 border-t-2 border-border">
+          {exp.tech.map((tech) => (
+            <span
               key={tech}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={isInView ? { opacity: 1, scale: 1 } : { opacity: 0, scale: 0.8 }}
-              transition={{ delay: index * 0.08 + techIndex * 0.03 + 0.25 }}
-              whileHover={{ y: -2 }}
-              className="skill-badge px-3 py-1 bg-transparent text-xs"
+              className="skill-badge px-3 py-1 bg-transparent text-xs hover:-translate-y-0.5"
             >
               {tech}
-            </motion.span>
+            </span>
           ))}
-        </motion.div>
+        </div>
 
         {/* Hover glow effect */}
         <motion.div
