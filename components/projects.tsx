@@ -16,6 +16,14 @@ type Project = {
 
 const projects: Project[] = [
   {
+    title: "Repofy",
+    description: "Turns GitHub profiles into actionable intelligence — explore real developer stats, generate AI-powered career advice with growth roadmaps, and export polished PDF reports.",
+    tech: ["Next.js", "Express", "Supabase", "OpenAI", "Stripe"],
+    github: "https://github.com/rezwans1027/repofy",
+    demo: "https://repofy.app",
+    category: "AI/SaaS",
+  },
+  {
     title: "DriveLeads",
     description: "Multi-tenant lead management platform with secure row-level access controls, automated intake pipeline, and real-time analytics.",
     tech: ["Next.js", "NestJS", "PostgreSQL", "Supabase"],
@@ -30,14 +38,6 @@ const projects: Project[] = [
     github: "#",
     demo: "#",
     category: "FinTech",
-  },
-  {
-    title: "LLM Assistant",
-    description: "LLM-powered knowledge assistant with context-aware responses, 40% latency reduction, scaling to 10K+ daily queries.",
-    tech: ["React Native", "Firebase", "NestJS", "LLM"],
-    github: "#",
-    demo: "#",
-    category: "AI/Mobile",
   },
   {
     title: "ReceiptRanger",
@@ -155,10 +155,23 @@ function ProjectCard({ project, index }: { project: Project; index: number }) {
               <span>Private</span>
             </span>
           )}
-          <span className="flex items-center gap-2 text-muted-foreground/40 cursor-not-allowed">
-            <ExternalLink className="w-4 h-4" />
-            <span>Demo</span>
-          </span>
+          {project.demo !== "#" ? (
+            <Link
+              href={project.demo}
+              target="_blank"
+              className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors group/link"
+            >
+              <motion.div whileHover={{ scale: 1.1 }} transition={{ duration: 0.3 }}>
+                <ExternalLink className="w-4 h-4" />
+              </motion.div>
+              <span className="link-underline">Demo</span>
+            </Link>
+          ) : (
+            <span className="flex items-center gap-2 text-muted-foreground/40 cursor-not-allowed">
+              <ExternalLink className="w-4 h-4" />
+              <span>Demo</span>
+            </span>
+          )}
         </div>
 
       </div>
